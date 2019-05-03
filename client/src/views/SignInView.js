@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap'
-import AuthForm from '../components/AuthForm'
+import SignInBanner from '../components/SignInBanner'
+import CustomForm from '../components/CustomForm'
 import AuthButton from '../components/AuthButton'
 import LoadingIcon from '../components/LoadingIcon'
 import { withRouter, Redirect } from 'react-router-dom'
 
-const bannerImagePath = require('../images/login.png')
-const bannerImageStyle = {
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'contain',
-    width: '100%',
-    height: '100vh'
-}
+const ihme_logo = require("../images/ihme_logo.png")
 
 const H1Style = {
     textAlign: 'center',
@@ -21,8 +16,8 @@ const H1Style = {
 
 const FormContainerStyle = {
     margin: 'auto', 
-    position: 'relative', 
-    transform: 'translate(0%, 30%)'
+    position: 'absloute', 
+    transform: 'translate(0%, 50%)'
 }
 
 class SignInView extends Component {
@@ -51,17 +46,17 @@ class SignInView extends Component {
             <Container style={{ maxWidth: '100%' }}>
                 <Row>
                     <Col sm="6" className='d-none d-sm-block' style={{ paddingLeft: '0' }}>
-                        <img src={bannerImagePath} alt="test"
-                            style={bannerImageStyle} />
+                        <SignInBanner />
                     </Col>
                     <Col xs="12" sm="6">
-                        {<img src={require("../images/ihme_logo.png")} alt="IHME logo" style={{ paddingTop: '10px', height: '80px' }} />}
+                        {<img src={ihme_logo} alt="IHME logo" className="d-sm-none d-xs-block" style={{ paddingTop: '10px', height: '80px' }} />}
 
+                    
                         <div style={FormContainerStyle}>
                             <h1 style={H1Style}>Sign in</h1>
                             <form>
-                                <AuthForm labelText="Email" imagePath={require("../images/green_user.png")}/>
-                                <AuthForm labelText="Password" type="password" imagePath={require("../images/password.png")}/>
+                                <CustomForm labelText="Email" imagePath={require("../images/green_user.png")}/>
+                                <CustomForm labelText="Password" type="password" imagePath={require("../images/password.png")}/>
                             </form>
                             <div style={{ marginTop: '60px'}}>
                                 <LoadingIcon loading={this.state.loading} />
