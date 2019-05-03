@@ -25,6 +25,22 @@ class ProfileView extends Component {
         };
     }
 
+    componentDidMount() {
+        var url = ""
+
+
+        fetch(url, {
+            headers: {
+                "Content-Type" : "application/json"
+            }
+        })
+
+
+
+
+    }
+
+
     toggle(tab) {
         if (this.state.activeTab !== tab) {
             this.setState({

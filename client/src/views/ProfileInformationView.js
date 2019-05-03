@@ -7,11 +7,8 @@ class ProfileInformationView extends Component {
         return (
             <Container>
                 <Row>
-                    <Col>
+                    <Col sm="6">
                         <CardContainer title="Contact Details"/>
-                    </Col>
-                    <Col>
-                        <CardContainer title="Contact Information"/>
                     </Col>
                 </Row>
             </Container>

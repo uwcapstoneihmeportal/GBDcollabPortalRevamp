@@ -8,6 +8,12 @@ const HeaderStyle = {
     fontSize: '15pt'
 }
 
+const CardTitleStyle = {
+    fontWeight: 'bold'
+
+
+}
+
 class CardContainer extends Component {
     render() {
         return (
@@ -17,9 +23,9 @@ class CardContainer extends Component {
                         {this.props.title}
                     </CardHeader>
                     <CardBody>
-                        <CardTitle>Name</CardTitle>
+                        <CardTitle style={CardTitleStyle}>Name</CardTitle>
                         <CardText>
-                            With supporting text below as a natural lead-in to additional content.
+                            Sam Johnson
                         </CardText>
                     </CardBody>
                 </Card>
