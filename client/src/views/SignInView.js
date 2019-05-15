@@ -17,7 +17,7 @@ const H1Style = {
 const FormContainerStyle = {
     margin: 'auto', 
     position: 'absloute', 
-    transform: 'translate(0%, 50%)'
+    transform: 'translate(0%, 40%)'
 }
 
 class SignInView extends Component {

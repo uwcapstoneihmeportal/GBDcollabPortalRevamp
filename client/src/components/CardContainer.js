@@ -10,8 +10,6 @@ const HeaderStyle = {
 
 const CardTitleStyle = {
     fontWeight: 'bold'
-
-
 }
 
 class CardContainer extends Component {
@@ -19,9 +17,6 @@ class CardContainer extends Component {
         return (
             <div style={{ marginTop: '20px', marginBottom: '20px' }}>
                 <Card>
-                    <CardHeader style={HeaderStyle}>
-                        {this.props.title}
-                    </CardHeader>
                     <CardBody>
                         <CardTitle style={CardTitleStyle}>Name</CardTitle>
                         <CardText>

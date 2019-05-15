@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import { NavItem, NavLink, } from 'reactstrap' 
 
-const NavItemStyle = {
-
-
-}
-
 const NavLinkStyle = {
     color: 'black',
     fontSize: '16px'
@@ -14,8 +9,10 @@ const NavLinkStyle = {
 class NavigationItem extends Component {
     render() {
         return (
-            <NavItem style={{NavItemStyle}}>
-                <NavLink style={NavLinkStyle} href="/home">{this.props.label}</NavLink>
+            <NavItem>
+                <NavLink style={NavLinkStyle} href="/home">             
+                    {this.props.label}
+                </NavLink>
             </NavItem>
         )
     }

@@ -30,11 +30,11 @@ class HomeView extends Component {
                     </Row>
                     <Row>
                         <Col sm="12">
-                            <h4 style={{ marginTop: '30px', marginBottom: '15px' }}>Resources, Tools, &amp; Instructional Videos</h4>
+                            {/* <h4 style={{ marginTop: '30px', marginBottom: '15px' }}>Resources, Tools, &amp; Instructional Videos</h4>
                             <p>
 
 
-                            </p>
+                            </p> */}
                         </Col>
                     </Row>
                 </Container>
