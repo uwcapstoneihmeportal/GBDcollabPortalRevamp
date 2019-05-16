@@ -8,7 +8,7 @@ const BannerStyle = {
     color: 'white',
     marginBottom: '15px',
     paddingTop: '15vh',
-    paddingLeft: '8vh',
+    paddingLeft: '12vh',
     paddingBottom: '15vh',
 }
 
@@ -18,8 +18,8 @@ const ImageStyle = {
 
 const LabelStyle = {
     fontSize: '20px',
-    marginLeft: '10px',
-    marginRight: '10px'
+    marginLeft: '2vh',
+    marginRight: '4vh'
 }
 
 class ProfileBanner extends Component {
@@ -28,11 +28,11 @@ class ProfileBanner extends Component {
             <div style={BannerStyle}>
                 <h1>Hello, Sam!</h1>
                 <div>
-                    <img src={jobIcon} alt="job image icon" style={ImageStyle} />
+                    <img src={jobIcon} alt="job icon" style={ImageStyle} />
                     <span style={LabelStyle}>
                         Health Specialist
                     </span>
-                    <img src={locationIcon} alt="location image icon" style={ImageStyle} />
+                    <img src={locationIcon} alt="location icon" style={ImageStyle} />
                     <span style={LabelStyle}>
                         United States, WA
                     </span>

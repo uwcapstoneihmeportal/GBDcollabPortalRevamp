@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import { Card, Button, CardHeader, CardFooter, CardBody, CardTitle, CardText } from 'reactstrap';
 import classnames from 'classnames';
 
-const HeaderStyle = {
-    backgroundColor: 'grey',
-    color: 'white',
-    fontSize: '15pt'
-}
 
 const CardTitleStyle = {
-    fontWeight: 'bold'
+    textTransform: 'uppercase',
+    color: '#c1c1c1'
+}
+
+const CardTextStyle = {
+    color: 'black',
+    textTransform: 'capitalize'
 }
 
 class CardContainer extends Component {
@@ -18,9 +19,11 @@ class CardContainer extends Component {
             <div style={{ marginTop: '20px', marginBottom: '20px' }}>
                 <Card>
                     <CardBody>
-                        <CardTitle style={CardTitleStyle}>Name</CardTitle>
-                        <CardText>
-                            Sam Johnson
+                        <CardTitle style={CardTitleStyle}>
+                            {this.props.title}
+                        </CardTitle>
+                        <CardText style={CardTextStyle}>
+                            {this.props.text}
                         </CardText>
                     </CardBody>
                 </Card>

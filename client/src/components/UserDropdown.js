@@ -43,9 +43,9 @@ class UserDropdown extends Component {
         return (
             <UncontrolledDropdown style={{textAlign: 'right', marginTop: '40px'}}>
                 <DropdownToggle style={DropdownToggleStyle}>
-                    <img src={userImage} alt="image of user" style={{...BaseImageStyle}}/>
+                    <img src={userImage} alt="user" style={{...BaseImageStyle}}/>
                     Welcome, Sam
-                    <img src={dropdownImage} alt="image of user" style={{...BaseImageStyle, ...DropdownImageStyle}}/>
+                    <img src={dropdownImage} alt="user" style={{...BaseImageStyle, ...DropdownImageStyle}}/>
                 </DropdownToggle>
                 <DropdownMenu>
                     <DropdownItem header style={{fontSize: '20px', color: '#2F4F4F', textAlign: 'right'}}>
