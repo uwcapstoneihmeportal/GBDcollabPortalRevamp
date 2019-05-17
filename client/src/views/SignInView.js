@@ -72,6 +72,7 @@ class SignInView extends Component {
                             <SignInBanner />
                         </Col>
                         <Col xs="12" sm="6">
+
                             {<img src={ihme_logo} alt="IHME logo" className="d-sm-none d-xs-block" style={{ paddingTop: '10px', height: '80px' }} />}
 
                             <div style={FormContainerStyle}>

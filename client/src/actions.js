@@ -22,12 +22,13 @@ function loginSuccess() {
     }
 }
 
-function loginFailure() {
+function loginFailure(errorMessage) {
     return {
         type: LOGIN_FAILURE,
         data: {
             isFetching: false,
             isAuthenticated: false,
+            error: errorMessage
         }
     }
 }
