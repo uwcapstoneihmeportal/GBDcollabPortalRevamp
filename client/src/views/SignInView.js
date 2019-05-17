@@ -1,13 +1,23 @@
 import React, { Component } from 'react';
-import { Container, Row, Col } from 'reactstrap'
-import SignInBanner from '../components/SignInBanner'
-import CustomForm from '../components/CustomForm'
-import AuthButton from '../components/AuthButton'
-import LoadingIcon from '../components/LoadingIcon'
-import { withRouter, Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
+// Components
+import SignInBanner from '../components/SignInBanner'
+import CustomInput from '../components/CustomInput'
+import AuthButton from '../components/AuthButton'
+
+import { Container, Row, Col, Form } from 'reactstrap'
+import LoadingOverlay from 'react-loading-overlay'
+import { DotLoader } from 'react-spinners'
+
+// Actions
+import { loginUser } from '../actions'
+
+// Images
 const ihme_logo = require("../images/ihme_logo.png")
 
+// Styling
 const H1Style = {
     textAlign: 'center',
     fontSize: '32px',
@@ -22,52 +32,94 @@ const FormContainerStyle = {
 
 class SignInView extends Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
-            referrer: null,
-            loading: false
-        };
+            email: '',
+            password: '',
+        }
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleChange = this.handleChange.bind(this)
+        // TODO, logout user if they go back to the sign in page
     }
 
-    handleClick = () => {
-        this.setState({ loading: true })
+    handleSubmit(event) {
+        event.preventDefault()
+        // TODO: do some client side checks for the given fields
+        
+        const email = this.state.email.trim()
+        const password = this.state.password.trim()
 
-        setTimeout(() => {
-            this.setState({ referrer: '/home' })
-            this.setState({ loading: false })
-        }, 2 * 1000)
+        if (email.length > 0 && password.length > 0) {
+            this.props.dispatch(loginUser(email, password))
+        }
+    }
+
+    handleChange(event) {
+        this.setState({ [event.target.name]: event.target.value })
     }
 
     render() {
-        const { referrer } = this.state;
-        if (referrer) return <Redirect to={referrer} />;
+        const { isAuthenticated, isFetching } = this.props
 
+        // check to see if we are authenticated, if so, redirect to home page
+        if (isAuthenticated && !isFetching) {
+            return (<Redirect push to='/home' /> )
+        }
+ 
         return (
-            <Container style={{ maxWidth: '100%' }}>
-                <Row>
-                    <Col sm="6" className='d-none d-sm-block' style={{ paddingLeft: '0' }}>
-                        <SignInBanner />
-                    </Col>
-                    <Col xs="12" sm="6">
-                        {<img src={ihme_logo} alt="IHME logo" className="d-sm-none d-xs-block" style={{ paddingTop: '10px', height: '80px' }} />}
+            <LoadingOverlay 
+                active={isFetching}      
+                spinner={<DotLoader color="#26a146"/>} 
+            >
+                <Container style={{ maxWidth: '100%' }}>
+                    <Row>
+                        <Col sm="6" className='d-none d-sm-block' style={{ paddingLeft: '0' }}>
+                            <SignInBanner />
+                        </Col>
+                        <Col xs="12" sm="6">
+                            {<img src={ihme_logo} alt="IHME logo" className="d-sm-none d-xs-block" style={{ paddingTop: '10px', height: '80px' }} />}
 
-                    
-                        <div style={FormContainerStyle}>
-                            <h1 style={H1Style}>Sign in</h1>
-                            <form>
-                                <CustomForm labelText="Email" imagePath={require("../images/green_user.png")}/>
-                                <CustomForm labelText="Password" type="password" imagePath={require("../images/password.png")}/>
-                            </form>
-                            <div style={{ marginTop: '60px'}}>
-                                <LoadingIcon loading={this.state.loading} />
-                                <AuthButton labelText="Sign in" onClick={this.handleClick} />
+                            <div style={FormContainerStyle}>
+                                <h1 style={H1Style}>
+                                    Sign in
+                                </h1>
+                                <Form>
+                                    <CustomInput
+                                        ref="email"
+                                        labelText="Email"
+                                        onChangeCallback={this.handleChange}
+                                        imagePath={require("../images/green_user.png")}
+                                    />
+                                    <CustomInput 
+                                        ref="password"
+                                        labelText="Password" 
+                                        type="password"
+                                        onChangeCallback={e => this.setState({password: e.target.value})}
+                                        imagePath={require("../images/password.png")}
+                                    />
+                                </Form>
+                                <div style={{ marginTop: '60px'}}>
+                                    <AuthButton 
+                                        labelText="Sign in" 
+                                        onClick={this.handleChange} 
+                                        disabled={!this.state.emailValid}
+                                    />
+                                </div>
                             </div>
-                        </div>
-                    </Col>
-                </Row>
-            </Container>
-        );
+                        </Col>
+                    </Row>
+                </Container>
+            </LoadingOverlay>
+        )
     }
 }
 
-export default withRouter(SignInView)
+// Redux
+function mapStateToProps(state) {
+    return {
+        isAuthenticated: state.auth.isAuthenticated,
+        isFetching: state.auth.isFetching
+    }
+}
+
+export default connect(mapStateToProps)(SignInView)

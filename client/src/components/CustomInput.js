@@ -22,14 +22,22 @@ const FormFeedbackStyle = {
     marginLeft: '50px'
 }
 
-export default class CustomForm extends Component {
+class CustomInput extends Component {
     render() {
         const image = 'url(' + this.props.imagePath + ')'
 
         return (
             <FormGroup style={FormGroupStyle}>
-                <Input type={ this.props.type } placeholder={this.props.labelText} style={{...InputStyle, ...{backgroundImage: image}}} />
+                <Input 
+                    type={ this.props.type }
+                    onChange={this.props.onChangeCallback}
+                    placeholder={ this.props.labelText } 
+                    style={{...InputStyle, ...{backgroundImage: image}}} 
+                />
+                <FormFeedback>{ this.props.feedback }</FormFeedback>
             </FormGroup>
         );
     }
 }
+
+export default CustomInput

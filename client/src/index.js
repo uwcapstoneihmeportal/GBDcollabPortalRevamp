@@ -7,10 +7,12 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+import thunkMiddleware from 'redux-thunk'
 import rootReducer from './reducers'
 
-const store = createStore(rootReducer)
+let createStoreWithMiddleware = applyMiddleware(thunkMiddleware)(createStore)
+const store = createStoreWithMiddleware(rootReducer)
 
 ReactDOM.render(
 <Provider store={store} >

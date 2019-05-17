@@ -1,44 +1,75 @@
 // actions.js
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from './constants/actionTypes' 
 
-// The three possible states for the login process
-export const LOGIN_REQUEST = "LOGIN_REQUEST"
-export const LOGIN_SUCCESS = "LOGIN_SUCCESS"
-export const LOGIN_FAILURE = "LOGIN_FAILURE"
-
-function requestLogin(credentials) {
+function loginRequest(email, password) {
     return {
         type: LOGIN_REQUEST,
-        isFetching: true,
-        isAuthenticated: false,
-        credentials
+        data: {
+            isFetching: true,
+            isAuthenticated: false,
+            userEmail: email
+        }
     }
 }
 
-function successfulLogin(user) {
+function loginSuccess() {
     return {
         type: LOGIN_SUCCESS,
-        isFetching: false,
-        isAuthenticated: true,
-        userID: user.userId
+        data: {
+            isFetching: false,
+            isAuthenticated: true,
+        }
     }
 }
 
-function loginError(message) {
+function loginFailure() {
     return {
-        type: LOGIN_SUCCESS,
-        isFetching: false,
-        isAuthenticated: true,
-        message
+        type: LOGIN_FAILURE,
+        data: {
+            isFetching: false,
+            isAuthenticated: false,
+        }
     }
 }
 
-export function loginUser(credentials) {
+export function loginUser(email, password) {
+    let config = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            email: email,
+            password: password
+        })
+    }
+
     return dispatch => {
-        dispatch(requestLogin(credentials))
+        dispatch(loginRequest(email, password))
 
-        // go and fetch user data, save state, present it
+        fetch("https://api.infonexus.me/v1/authorize", config)
+        .then(response => {
+            switch (response.status) {
+                // Successful log in
+                case 200:
+                    return response.json()
 
-        // make sure to handle errors
+                // Unauthorized
+                case 401:
+                    throw new Error("Login Failed: Incorrect email or password entered")
+
+                default:
+                    throw new Error("Something went wrong :( try again soon!")
+            }            
+        })
+        .then(json => {
+            console.log(json)
+            dispatch(loginSuccess())
+        })
+        .catch(errorMessage => {
+            dispatch(loginFailure(errorMessage))
+            console.log(errorMessage)
+        })
     }
 }
 

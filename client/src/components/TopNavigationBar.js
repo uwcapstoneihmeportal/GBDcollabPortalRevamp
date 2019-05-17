@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap'
+import { FormGroup } from 'reactstrap'
 
 import UserDropdown from '../components/UserDropdown'
-import CustomForm from '../components/CustomForm'
+import CustomInput from '../components/CustomInput'
 
 const backgroundColor = "#cbe2a0"
+
 const TopNavigationStyle = {
     backgroundColor: backgroundColor
+}
+
+const FormGroupStyle = {
+    marginTop: '30px'
 }
 
 class TopNavigationBar extends Component {
@@ -19,7 +25,14 @@ class TopNavigationBar extends Component {
                             
                         </Col>
                         <Col sm="6">
-                            <CustomForm labelText="Search" imagePath={require("../images/search.png")}/>
+                            <FormGroup style={FormGroupStyle}>
+                                <CustomInput 
+                                    labelText="Search" 
+                                    imagePath={require("../images/search.png")}
+                                />
+                            </FormGroup> 
+
+                            
                         </Col>
                         <Col sm="3">
                             <UserDropdown />
