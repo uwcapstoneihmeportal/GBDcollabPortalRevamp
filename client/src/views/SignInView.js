@@ -38,7 +38,6 @@ class SignInView extends Component {
             password: '',
         }
         this.handleSubmit = this.handleSubmit.bind(this)
-        this.handleChange = this.handleChange.bind(this)
         // TODO, logout user if they go back to the sign in page
     }
 
@@ -54,16 +53,12 @@ class SignInView extends Component {
         }
     }
 
-    handleChange(event) {
-        this.setState({ [event.target.name]: event.target.value })
-    }
-
     render() {
         const { isAuthenticated, isFetching } = this.props
 
         // check to see if we are authenticated, if so, redirect to home page
         if (isAuthenticated && !isFetching) {
-            return (<Redirect push to='/home' /> )
+            return (<Redirect to='/home' /> )
         }
  
         return (
@@ -87,7 +82,7 @@ class SignInView extends Component {
                                     <CustomInput
                                         ref="email"
                                         labelText="Email"
-                                        onChangeCallback={this.handleChange}
+                                        onChangeCallback={e => this.setState({email: e.target.value})}
                                         imagePath={require("../images/green_user.png")}
                                     />
                                     <CustomInput 
@@ -101,8 +96,7 @@ class SignInView extends Component {
                                 <div style={{ marginTop: '60px'}}>
                                     <AuthButton 
                                         labelText="Sign in" 
-                                        onClick={this.handleChange} 
-                                        disabled={!this.state.emailValid}
+                                        onClick={this.handleSubmit} 
                                     />
                                 </div>
                             </div>

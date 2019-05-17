@@ -18,7 +18,6 @@ const ImageStyle = {
 }
 
 const PortalTextStyle = {
-    
     color: 'white',
     fontSize: '30px',
     marginTop: '20px'
