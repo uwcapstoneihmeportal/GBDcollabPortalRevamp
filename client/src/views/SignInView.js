@@ -11,7 +11,7 @@ import CustomInput from '../components/CustomInput'
 import AuthButton from '../components/AuthButton'
 
 // Actions
-import { loginUser, logoutUser } from '../actions'
+import { loginUser, logoutUser } from '../redux/actions'
 
 // Images
 const ihmeLogo = require("../images/ihme_logo.png")

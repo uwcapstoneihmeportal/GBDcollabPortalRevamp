@@ -8,13 +8,6 @@ import NavigationBar from '../components/NavigationBar'
 import MissionStatement from '../components/MissionStatement'
 import tableau from 'tableau-api'
 
-// Images
-const headerImage = require("../images/global_health_home.jpg")
-const HeaderImageStyle = {
-    width: '100%',
-    height: 'auto'
-}
-
 class HomeView extends Component {
     componentDidMount() {  
         this.initViz()  

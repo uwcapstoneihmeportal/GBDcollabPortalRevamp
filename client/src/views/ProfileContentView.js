@@ -48,7 +48,6 @@ class ProfileContentView extends Component {
                     </Row>
                 </Tab.Container>
             </div>
-
         )
     }
 }

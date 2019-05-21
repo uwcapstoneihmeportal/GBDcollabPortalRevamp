@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from './constants/actionTypes'
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from './actionTypes'
 
 const intitialState = {
     isFetching: false,

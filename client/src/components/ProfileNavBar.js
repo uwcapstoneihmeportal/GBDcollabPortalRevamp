@@ -9,7 +9,7 @@ const NavBarStyle = {
 
 const BrandStyle = {
     height: '60px',
-    paddingLeft: '8vh'
+    paddingLeft: '10vh'
 }
 
 const brandImage = require('../images/ihme_logo.png')

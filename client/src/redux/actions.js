@@ -2,7 +2,7 @@
 import { 
     LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, 
     LOGOUT_REQUEST, LOGOUT_SUCCESS 
-} from './constants/actionTypes' 
+} from './actionTypes' 
 
 function loginRequest(email, password) {
     return {
