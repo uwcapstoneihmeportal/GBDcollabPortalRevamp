@@ -1,15 +1,7 @@
 #!/usr/bin/env bash
 export TLSCERT=/etc/letsencrypt/live/api.kwontae.me/fullchain.pem
 export TLSKEY=/etc/letsencrypt/live/api.kwontae.me/privkey.pem
-export MYSQL_ADDR=myuserstore:3306
-export MYSQL_DATABASE=myuserstore
-export MYSQL_ROOT_PASSWORD=$(openssl rand -base64 18)
-docker stop myuserstore
-docker stop devredis
-docker stop myrabbitmq
-docker stop gateway
-docker stop summaryservice
-docker stop messageservice
+
 
 docker system prune -f
 
@@ -32,11 +24,6 @@ docker run --name devredis -d --restart unless-stopped \
 --network kwontaeNet \
 redis
 
-docker pull taehyun123/summary
-docker run -d --name summaryservice --restart unless-stopped \
---network kwontaeNet \
-taehyun123/summary
-
 docker run -d --name myrabbitmq --restart unless-stopped \
 --network kwontaeNet \
 rabbitmq:3-alpine
@@ -52,20 +39,25 @@ docker run -d --name messageservice --restart unless-stopped \
 --network kwontaeNet \
 taehyun123/messaging
 
+export CONSUMER_ID=3MVG98im9TK34CUVA0sKni7GETEp76OGIhQm.P0c5NvWiUOeIsdLgZzu_wLBw57Wv4HyXjC7CrTfVkcAYku0E
+export API_VERSION=v45.0
+export CONSUMER_SECRET=E1C0E55FD694F1F8E59602397F16A923A95201980C751B4571D78FB7B650737E
+export SECURITY_TOKEN=n0GHEJJc3Z2Iua2OWy3f35c2C
+export FORCE_USERNAME=azuqua@healthdata.org.ischool2
+export FORCE_PASSWORD=ischool2019
+export FORCE_API_ENV=sandbox
+
 docker pull taehyun123/gateway
 docker run -d -p 443:443 --restart unless-stopped --name gateway \
---network kwontaeNet \
 -v /etc/letsencrypt:/etc/letsencrypt:ro \
--e TLSCERT=/etc/letsencrypt/live/api.kwontae.me/fullchain.pem \
--e TLSKEY=/etc/letsencrypt/live/api.kwontae.me/privkey.pem \
--e MYSQL_ADDR=$MYSQL_ADDR \
--e MYSQL_DATABASE=$MYSQL_DATABASE \
--e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD \
--e REDISADDR=$REDISADDR \
--e SESSIONKEY=$SESSIONKEY \
--e SUMMARYADDRS=summaryservice:80 \
--e MESSAGESADDR=messageservice:4000 \
--e MQADDR=myrabbitmq:5672 \
+-e TLSCERT=/etc/letsencrypt/live/api.infonexus.me/fullchain.pem \
+-e TLSKEY=/etc/letsencrypt/live/api.infonexus.me/privkey.pem \
+-e CONSUMER_ID=$CONSUMER_ID \
+-e API_VERSION=$API_VERSION \
+-e CONSUMER_SECRET=$CONSUMER_SECRET \
+-e SECURITY_TOKEN=$SECURITY_TOKEN \
+-e FORCE_USERNAME=$FORCE_USERNAME \
+-e FORCE_PASSWORD=$FORCE_PASSWORD \
+-e FORCE_API_ENV=$FORCE_API_ENV \
 taehyun123/gateway
-
 
