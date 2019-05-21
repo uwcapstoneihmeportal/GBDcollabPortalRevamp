@@ -8,8 +8,6 @@ import HomeView from './views/HomeView'
 import ProfileView from './views/ProfileView'
 import VizTestView from './views/VizTestView'
 
-// Style related imports
-import './styles/App.css'
 
 class App extends Component {
   render() {

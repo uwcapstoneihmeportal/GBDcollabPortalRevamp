@@ -7,8 +7,7 @@ import TopNavigationBar from '../components/TopNavigationBar'
 const backgroundColor = "#cbe2a0"
 
 const NavBarStyle = {
-    backgroundColor: backgroundColor,
-    paddingTop: '10px'
+    backgroundColor: backgroundColor
 }
 
 const brandImage = require('../images/ihme_logo.png')

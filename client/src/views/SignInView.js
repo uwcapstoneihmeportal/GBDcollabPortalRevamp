@@ -3,19 +3,18 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
 // Components
+import { Container, Row, Col, Form } from 'reactstrap'
+import LoadingOverlay from 'react-loading-overlay'
+import { DotLoader } from 'react-spinners'
 import SignInBanner from '../components/SignInBanner'
 import CustomInput from '../components/CustomInput'
 import AuthButton from '../components/AuthButton'
 
-import { Container, Row, Col, Form } from 'reactstrap'
-import LoadingOverlay from 'react-loading-overlay'
-import { DotLoader } from 'react-spinners'
-
 // Actions
-import { loginUser } from '../actions'
+import { loginUser, logoutUser } from '../actions'
 
 // Images
-const ihme_logo = require("../images/ihme_logo.png")
+const ihmeLogo = require("../images/ihme_logo.png")
 
 // Styling
 const H1Style = {
@@ -25,9 +24,23 @@ const H1Style = {
 }
 
 const FormContainerStyle = {
-    margin: 'auto', 
-    position: 'absloute', 
+    margin: 'auto',
+    position: 'absloute',
     transform: 'translate(0%, 40%)'
+}
+
+const LoginErrorStyle = {
+    color: 'red',
+    textAlign: 'center'
+}
+
+// Redux
+function mapStateToProps(state) {
+    return {
+        isAuthenticated: state.auth.isAuthenticated,
+        isFetching: state.auth.isFetching,
+        error: state.auth.error
+    }
 }
 
 class SignInView extends Component {
@@ -38,13 +51,13 @@ class SignInView extends Component {
             password: '',
         }
         this.handleSubmit = this.handleSubmit.bind(this)
-        // TODO, logout user if they go back to the sign in page
+
+        // TODO: logout user 
     }
 
     handleSubmit(event) {
         event.preventDefault()
         // TODO: do some client side checks for the given fields
-        
         const email = this.state.email.trim()
         const password = this.state.password.trim()
 
@@ -54,17 +67,17 @@ class SignInView extends Component {
     }
 
     render() {
-        const { isAuthenticated, isFetching } = this.props
+        const { isAuthenticated, isFetching, error } = this.props
 
         // check to see if we are authenticated, if so, redirect to home page
         if (isAuthenticated && !isFetching) {
-            return (<Redirect to='/home' /> )
+            return (<Redirect to='/home' />)
         }
- 
+
         return (
-            <LoadingOverlay 
-                active={isFetching}      
-                spinner={<DotLoader color="#26a146"/>} 
+            <LoadingOverlay
+                active={isFetching}
+                spinner={<DotLoader color="#26a146" />}
             >
                 <Container style={{ maxWidth: '100%' }}>
                     <Row>
@@ -73,7 +86,7 @@ class SignInView extends Component {
                         </Col>
                         <Col xs="12" sm="6">
 
-                            {<img src={ihme_logo} alt="IHME logo" className="d-sm-none d-xs-block" style={{ paddingTop: '10px', height: '80px' }} />}
+                            {<img src={ihmeLogo} alt="IHME logo" className="d-sm-none d-xs-block" style={{ paddingTop: '10px', height: '80px' }} />}
 
                             <div style={FormContainerStyle}>
                                 <h1 style={H1Style}>
@@ -83,37 +96,30 @@ class SignInView extends Component {
                                     <CustomInput
                                         ref="email"
                                         labelText="Email"
-                                        onChangeCallback={e => this.setState({email: e.target.value})}
+                                        onChangeCallback={e => this.setState({ email: e.target.value })}
                                         imagePath={require("../images/green_user.png")}
                                     />
-                                    <CustomInput 
+                                    <CustomInput
                                         ref="password"
-                                        labelText="Password" 
+                                        labelText="Password"
                                         type="password"
-                                        onChangeCallback={e => this.setState({password: e.target.value})}
+                                        onChangeCallback={e => this.setState({ password: e.target.value })}
                                         imagePath={require("../images/password.png")}
                                     />
                                 </Form>
-                                <div style={{ marginTop: '60px'}}>
-                                    <AuthButton 
-                                        labelText="Sign in" 
-                                        onClick={this.handleSubmit} 
+                                <div style={{ marginTop: '60px' }}>
+                                    <AuthButton
+                                        labelText="Sign in"
+                                        onClick={this.handleSubmit}
                                     />
                                 </div>
+                                <p style={LoginErrorStyle}>{error}</p>
                             </div>
                         </Col>
                     </Row>
                 </Container>
             </LoadingOverlay>
         )
-    }
-}
-
-// Redux
-function mapStateToProps(state) {
-    return {
-        isAuthenticated: state.auth.isAuthenticated,
-        isFetching: state.auth.isFetching
     }
 }
 

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import ProfileNavbar from './ProfileNavBar'
+
 const jobIcon = require('../images/job.png')
 const locationIcon = require('../images/location.png')
 
@@ -7,9 +9,8 @@ const BannerStyle = {
     background: 'linear-gradient(#cbe2a0, #26a146)',
     color: 'white',
     marginBottom: '15px',
-    paddingTop: '15vh',
-    paddingLeft: '12vh',
     paddingBottom: '15vh',
+    textAlign: 'center'
 }
 
 const ImageStyle = {
@@ -26,6 +27,7 @@ class ProfileBanner extends Component {
     render() {
         return (
             <div style={BannerStyle}>
+                <ProfileNavbar />
                 <h1>Hello, Sam!</h1>
                 <div>
                     <img src={jobIcon} alt="job icon" style={ImageStyle} />

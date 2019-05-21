@@ -26,7 +26,7 @@ class ProfileContentView extends Component {
             <div style={ContainerStyle}>
                 <Tab.Container defaultActiveKey={items[0]}>
                     <Row>
-                        <Col sm={4}>
+                        <Col sm={3}>
                             <Nav variant="pills" className="flex-column">
                                 {items.map(item =>
                                     <Nav.Item>
@@ -37,28 +37,11 @@ class ProfileContentView extends Component {
                                 )}
                             </Nav>
                         </Col>
-                        <Col sm={8}>
+                        <Col sm={9}>
                             <Tab.Content>
                                 <Tab.Pane eventKey="Profile">
-                                    <Row>
-                                        <Col sm="2">
-                                            <CardContainer title="prefix" text="dr." />
-                                        </Col>
-                                        <Col sm="5">
-                                            <CardContainer title="first name" text="sam" />
-                                        </Col>
-                                        <Col sm="5">
-                                            <CardContainer title="last name" text="johnson" />
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col sm="6">
-                                            <CardContainer title="gender" text="male" />
-                                        </Col>
-                                        <Col sm="6">
-                                            <CardContainer title="age" text="55-64" />
-                                        </Col>
-                                    </Row>
+                                    {/* Map over some data and create a row and column for each card */}
+                                    
                                 </Tab.Pane>
                             </Tab.Content>
                         </Col>

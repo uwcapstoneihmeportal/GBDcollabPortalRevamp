@@ -3,19 +3,14 @@ import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from './constants/actionT
 
 const intitialState = {
     isFetching: false,
-    isAuthenticated: false
+    isAuthenticated: false,
 }
 
 function authReducer(state = intitialState, action) {
     switch(action.type) {
+        // Falls through if one is successful
         case LOGIN_REQUEST: 
-            return Object.assign({}, state,
-                action.data
-            )
         case LOGIN_SUCCESS: 
-            return Object.assign({}, state,
-                action.data
-            )
         case LOGIN_FAILURE: 
             return Object.assign({}, state,
                 action.data

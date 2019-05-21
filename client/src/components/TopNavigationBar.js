@@ -11,10 +11,6 @@ const TopNavigationStyle = {
     backgroundColor: backgroundColor
 }
 
-const FormGroupStyle = {
-    marginTop: '30px'
-}
-
 class TopNavigationBar extends Component {
     render() {
         return (
@@ -25,7 +21,7 @@ class TopNavigationBar extends Component {
                             
                         </Col>
                         <Col sm="6">
-                            <FormGroup style={FormGroupStyle}>
+                            <FormGroup>
                                 <CustomInput 
                                     labelText="Search" 
                                     imagePath={require("../images/search.png")}

@@ -1,5 +1,8 @@
 // actions.js
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from './constants/actionTypes' 
+import { 
+    LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, 
+    LOGOUT_REQUEST, LOGOUT_SUCCESS 
+} from './constants/actionTypes' 
 
 function loginRequest(email, password) {
     return {
@@ -33,6 +36,16 @@ function loginFailure(errorMessage) {
     }
 }
 
+function logoutSuccess() {
+    return {
+        type: LOGOUT_SUCCESS,
+        data: {
+            isFetching: false,
+            isAuthenticated: false
+        }
+    }
+}
+
 export function loginUser(email, password) {
     let config = {
         method: 'POST',
@@ -57,24 +70,23 @@ export function loginUser(email, password) {
 
                 // Unauthorized
                 case 401:
-                    throw new Error("Login Failed: Incorrect email or password entered")
+                    throw Error("Sign In Failed: Incorrect email or password entered")
 
                 default:
-                    throw new Error("Something went wrong :( try again soon!")
+                    throw Error("Something went wrong :( try again soon!")
             }            
         })
         .then(json => {
-            console.log(json)
             dispatch(loginSuccess())
         })
-        .catch(errorMessage => {
-            dispatch(loginFailure(errorMessage))
-            console.log(errorMessage)
+        .catch(error => {
+            dispatch(loginFailure(error.message))
         })
     }
 }
 
 export function logoutUser() {
-
-
+    return dispatch => {
+        dispatch(logoutSuccess())
+    }
 }
