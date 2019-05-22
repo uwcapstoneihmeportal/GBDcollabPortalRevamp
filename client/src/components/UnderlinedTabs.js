@@ -6,8 +6,6 @@ import '../styles/profile.css'
 class UnderlinedTabs extends Component {
     render() {
         const tabs = this.props.tabs
-        console.log(this.props)
-
         return (
             <Tabs
                 defaultTab={this.props.default}

@@ -22,7 +22,7 @@ const CardTextStyle = {
 }
 
 const CardContainerStyle = {
-    boxShadow: '4px 4px 4px 4px #c1c1c1'
+    boxShadow: '3px 3px 3px 3px #c1c1c1'
 }
 
 class CardContainer extends Component {
@@ -58,7 +58,7 @@ class CardContainer extends Component {
 
         return (
             <Card style={CardContainerStyle}>
-                <CardBody>                    
+                <CardBody style={{ paddingLeft: '8vh' }}>                    
                     <h2 style={CardHeaderStyle}>
                         <span style={CardHeaderSpanStyle}>
                             {firstThreeTitleLetters}
