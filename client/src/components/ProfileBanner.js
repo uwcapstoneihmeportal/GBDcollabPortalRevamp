@@ -8,7 +8,7 @@ const locationIcon = require('../images/location.png')
 const BannerStyle = {
     background: 'linear-gradient(#cbe2a0, #26a146)',
     color: 'white',
-    paddingBottom: '15vh',
+    paddingBottom: '10vh',
     textAlign: 'center'
 }
 

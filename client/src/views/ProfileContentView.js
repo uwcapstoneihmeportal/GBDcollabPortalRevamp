@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col } from 'reactstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 import CardContainer from '../components/CardContainer'
 
 import { Tabs, Tab, TabPanel, TabList } from 'react-web-tabs'
@@ -9,22 +9,25 @@ const ContainerStyle = {
     textAlign: 'left',
     marginLeft: '4vh',
     marginRight: '12vh',
-    marginTop: '8vh',
+    marginTop: '4vh',
     marginBottom: '8vh'
 }
 
 const tabs = [
     {
         tabTitle: 'Profile',
-        content: <CardContainer />
+        content: [
+            <CardContainer />,
+            <CardContainer />
+        ]
     },
     {
         tabTitle: 'Affiliations',
-        content: <div></div>
+        content: [<div></div>]
     },
     {
         tabTitle: 'Engagment Details',
-        content: <div></div>
+        content: [<div></div>]
     },
 ]
 
@@ -43,7 +46,7 @@ class ProfileContentView extends Component {
             <Tabs
                 defaultTab={this.props.default}
                 vertical
-                style= {ContainerStyle}
+                style={ContainerStyle}
             >
                 <TabList style={this.props.style}>
                     {tabs.map(item => {
@@ -57,13 +60,17 @@ class ProfileContentView extends Component {
                     let title = item.tabTitle
                     let content = item.content
                     return (
-                        <TabPanel key={title} tabId={title} style={{width: '100%', marginLeft: '12vh' }}>
+                        <TabPanel key={title} tabId={title} style={{ width: '100%', marginLeft: '12vh' }}>
                             <Container>
-                            <Row>
-                                <Col>
-                                    {content}
-                                </Col>
-                            </Row>
+                                {content.map(card => {
+                                    return (
+                                        <Row style={{marginBottom: '6vh'}}>
+                                            <Col xs="12">
+                                                {card}
+                                            </Col>
+                                        </Row>
+                                    )
+                                })}
                             </Container>
                         </TabPanel>
                     )

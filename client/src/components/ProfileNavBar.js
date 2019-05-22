@@ -3,7 +3,7 @@ import { Navbar, NavbarToggler, NavbarBrand, Nav } from 'reactstrap';
 
 const NavBarStyle = {
     paddingTop: '10px',
-    marginBottom: '4vh'
+    marginBottom: '0vh'
 }
 
 const BrandStyle = {
