@@ -1,0 +1,12 @@
+.rwt__tablist:not([aria-orientation="vertical"]) 
+.rwt__tab[aria-selected="true"]:after {
+    border-bottom: 4px solid #26a146
+}
+
+.rwt__tab:focus {
+    background-color: transparent;
+}
+
+.rwt__tab {
+    color: #26a146;
+}

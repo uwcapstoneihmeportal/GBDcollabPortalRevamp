@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav } from 'reactstrap';
-import NavigationItem from '../components/NavigationItem'
+import { Navbar, NavbarToggler, NavbarBrand, Nav } from 'reactstrap';
 
 const NavBarStyle = {
     paddingTop: '10px',

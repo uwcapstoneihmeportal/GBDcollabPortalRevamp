@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap'
 import { Tab, Nav } from 'react-bootstrap'
-
 import CardContainer from '../components/CardContainer'
 
 const ContainerStyle = {
@@ -29,7 +28,7 @@ class ProfileContentView extends Component {
                         <Col sm={3}>
                             <Nav variant="pills" className="flex-column">
                                 {items.map(item =>
-                                    <Nav.Item>
+                                    <Nav.Item key={item}>
                                         <Nav.Link eventKey={item}>
                                             {item}
                                         </Nav.Link>
@@ -42,6 +41,10 @@ class ProfileContentView extends Component {
                                 <Tab.Pane eventKey="Profile">
                                     {/* Map over some data and create a row and column for each card */}
                                     
+                                    
+
+                                    <CardContainer 
+                                    />
                                 </Tab.Pane>
                             </Tab.Content>
                         </Col>

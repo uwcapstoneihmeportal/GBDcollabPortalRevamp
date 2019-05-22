@@ -11,10 +11,7 @@ import CustomInput from '../components/CustomInput'
 import AuthButton from '../components/AuthButton'
 
 // Actions
-import { loginUser, logoutUser } from '../redux/actions'
-
-// Images
-const ihmeLogo = require("../images/ihme_logo.png")
+import { loginUser } from '../redux/actions'
 
 // Styling
 const H1Style = {
@@ -86,7 +83,7 @@ class SignInView extends Component {
                         </Col>
                         <Col xs="12" sm="6">
 
-                            {<img src={ihmeLogo} alt="IHME logo" className="d-sm-none d-xs-block" style={{ paddingTop: '10px', height: '80px' }} />}
+                            {<img src={require("../images/ihme_logo.png")} alt="IHME logo" className="d-sm-none d-xs-block" style={{ paddingTop: '10px', height: '80px' }} />}
 
                             <div style={FormContainerStyle}>
                                 <h1 style={H1Style}>

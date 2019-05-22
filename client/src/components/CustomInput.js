@@ -18,10 +18,6 @@ const FormGroupStyle = {
     marginTop: '30px'
 }
 
-const FormFeedbackStyle = {
-    marginLeft: '50px'
-}
-
 class CustomInput extends Component {
     render() {
         const image = 'url(' + this.props.imagePath + ')'
