@@ -37,8 +37,6 @@ class ProfileView extends Component {
     }
 
     render() {     
-        
-        console.log(tabs)
         return (
             < div >
                 <ProfileBanner />

@@ -99,12 +99,10 @@ function fetchContactData(authInfo) {
                 // TODO ADD MORE CASES FOR ERRORS
     
                 default:
-                    // Propogate error up to be handled by login method
                     throw Error("Error getting user data, try again!")
             }
         })
         .then(userData => {
-            console.log(userData)
             dispatch(loginSuccess(userData))
         })
         .catch(error => {
