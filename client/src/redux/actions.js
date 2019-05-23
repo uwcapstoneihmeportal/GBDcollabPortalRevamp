@@ -14,12 +14,13 @@ function loginRequest(email, password) {
     }
 }
 
-function loginSuccess() {
+function loginSuccess(user) {
     return {
         type: LOGIN_SUCCESS,
         data: {
             isFetching: false,
             isAuthenticated: true,
+            user
         }
     }
 }
@@ -66,7 +67,7 @@ export function loginUser(email, password) {
             }            
         })
         .then(json => {
-            dispatch(loginSuccess())
+            dispatch(fetchContactData(json))
         })
         .catch(error => {
             dispatch(loginFailure(error.message))
@@ -74,3 +75,40 @@ export function loginUser(email, password) {
     }
 }
 
+function fetchContactData(authInfo) {
+    let contactObjectPath = authInfo.sobject_url
+    let authToken = authInfo.token_type + " " + authInfo.access_token
+    let baseURL = "https://ihme--ischool2.cs79.my.salesforce.com"
+    let userURL = baseURL + contactObjectPath
+
+    let config = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': authToken
+        }
+    }
+
+    return dispatch => {
+        fetch(userURL, config)
+        .then(response => {
+            switch(response.status) {
+                case 200:
+                    return response.json()
+    
+                // TODO ADD MORE CASES FOR ERRORS
+    
+                default:
+                    // Propogate error up to be handled by login method
+                    throw Error("Error getting user data, try again!")
+            }
+        })
+        .then(userData => {
+            console.log(userData)
+            dispatch(loginSuccess(userData))
+        })
+        .catch(error => {
+            dispatch(loginFailure(error.message))
+        })
+    }
+}
