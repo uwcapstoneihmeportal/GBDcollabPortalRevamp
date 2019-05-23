@@ -1,7 +1,6 @@
 // actions.js
 import { 
-    LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, 
-    LOGOUT_REQUEST, LOGOUT_SUCCESS 
+    LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE
 } from './actionTypes' 
 
 function loginRequest(email, password) {
@@ -32,16 +31,6 @@ function loginFailure(errorMessage) {
             isFetching: false,
             isAuthenticated: false,
             error: errorMessage
-        }
-    }
-}
-
-function logoutSuccess() {
-    return {
-        type: LOGOUT_SUCCESS,
-        data: {
-            isFetching: false,
-            isAuthenticated: false
         }
     }
 }
@@ -85,8 +74,3 @@ export function loginUser(email, password) {
     }
 }
 
-export function logoutUser() {
-    return dispatch => {
-        dispatch(logoutSuccess())
-    }
-}
