@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Button, CardHeader, CardBody, CardTitle, CardText, Row, Col } from 'reactstrap';
-import classnames from 'classnames';
+import { Card, CardBody, CardTitle, CardText, Row, Col } from 'reactstrap';
 
 const CardHeaderStyle = {
     color: '#696969'

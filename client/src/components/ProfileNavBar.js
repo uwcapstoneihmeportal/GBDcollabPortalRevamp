@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarToggler, NavbarBrand, Nav } from 'reactstrap';
+import { Navbar, NavbarBrand } from 'reactstrap';
 
 const NavBarStyle = {
     paddingTop: '10px',
