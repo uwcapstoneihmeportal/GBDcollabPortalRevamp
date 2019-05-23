@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { NavItem, NavLink, } from 'reactstrap' 
+import '../styles/navbar.css'
 
 const NavLinkStyle = {
-    color: 'black',
-    fontSize: '16px'
+    fontSize: '14pt'
 }
 
 class NavigationItem extends Component {

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 
 const StatementStyle = {
-    backgroundColor: "#cbe2a0",
+    background: 'rgba(38, 161, 70, 0.8)',
+    color: 'white',
     padding: "30px 50px 30px 50px",
     marginTop: '-75px',
     width: '60%'

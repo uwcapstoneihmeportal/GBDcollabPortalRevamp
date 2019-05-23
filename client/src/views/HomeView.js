@@ -23,9 +23,9 @@ class HomeView extends Component {
         const { isAuthenticated } = this.props
         
         // If user is not authenticated, then redirect to sign in
-        // if (!isAuthenticated) {
-        //     return (<Redirect to='/' /> )
-        // }
+        if (!isAuthenticated) {
+            return (<Redirect to='/' /> )
+        }
 
         return (
             <div>

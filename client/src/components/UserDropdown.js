@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { withRouter, Redirect } from 'react-router-dom'
-
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
 
 const DropdownToggleStyle = {
-    backgroundColor: '#cbe2a0',
+    backgroundColor: 'transparent',
     border: 'none',
-    color: 'black',
+    color: 'white',
     marginRight: '10px',
     textAlign: 'right'
 }
@@ -25,37 +25,32 @@ const userImage = require('../images/user.png')
 const dropdownImage = require('../images/dropdown.png')
 
 class UserDropdown extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            referrer: null,
-        };
-    }
-
-    handleClick = () => {
-        this.setState({ referrer: '/profile' })
-    }
-
     render() {
-        const { referrer } = this.state;
-        if (referrer) return <Redirect to={referrer} />;
+        const { firstName, lastName } = this.props
+        const welcomeUser = "Welcome, " + firstName 
+        const fullName = firstName + " " + lastName
 
         return (
             <UncontrolledDropdown style={{textAlign: 'right', marginTop: '40px'}}>
                 <DropdownToggle style={DropdownToggleStyle}>
                     <img src={userImage} alt="user" style={{...BaseImageStyle}}/>
-                    Welcome, Sam
+                    {welcomeUser}
                     <img src={dropdownImage} alt="user" style={{...BaseImageStyle, ...DropdownImageStyle}}/>
                 </DropdownToggle>
                 <DropdownMenu>
                     <DropdownItem header style={{fontSize: '20px', color: '#2F4F4F', textAlign: 'right'}}>
-                        Sam Johnson
+                        {fullName}
                     </DropdownItem>
-                    <DropdownItem onClick={this.handleClick}>
+                    <DropdownItem 
+                        onClick={e => {this.props.history.push('/profile')}}
+                    >
                         View Profile
                     </DropdownItem>
                     <DropdownItem divider />
-                    <DropdownItem style={{ color: 'red' }}>
+                    <DropdownItem 
+                        onClick={e => {this.props.history.push('/')}}
+                        style={{ color: 'red' }}
+                    >
                         Logout
                     </DropdownItem>
                 </DropdownMenu>
@@ -64,4 +59,12 @@ class UserDropdown extends Component {
     }
 }
 
-export default withRouter(UserDropdown)
+// Redux
+function mapStateToProps(state) {
+    return {
+        // firstName: state.auth.user.FirstName,
+        // lastName: state.auth.user.LastName
+    }
+}
+
+export default connect(mapStateToProps)(withRouter(UserDropdown))

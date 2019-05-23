@@ -36,7 +36,7 @@ class ProfileView extends Component {
         // make a post request for the new data
     }
 
-    render() {     
+    render() {
         return (
             < div >
                 <ProfileBanner />

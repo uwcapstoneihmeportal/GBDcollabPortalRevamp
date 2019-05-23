@@ -1,0 +1,9 @@
+.nav-link {
+    color: white
+}
+
+.nav-link:hover {
+    color: #cbe2a0;
+    text-decoration: underline;
+    text-decoration-color: #cbe2a0;
+}
