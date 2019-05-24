@@ -28,9 +28,8 @@ class CardContainer extends Component {
         const { title, data } = this.props
 
         const numDataPoints = data.length
-        const slicePoint = data.length / 2
-
-        // const slicePoint = numDataPoints % 2 == 0 ? numDataPoints / 2 : numDataPoints / 2 + 1
+        const slicePoint = numDataPoints % 2 == 0 ? numDataPoints / 2 : Math.floor(numDataPoints / 2 + 1)
+        const columnSize = 12 / slicePoint
 
         const firstThreeTitleLetters = title.slice(0, 3)
         const restOfTitle = title.slice(3)
@@ -51,7 +50,7 @@ class CardContainer extends Component {
                     <Row>
                         {firstRow.map(item => {
                             return (
-                                <Col sm={12 / slicePoint}>
+                                <Col sm={columnSize}>
                                     <CardTitle style={CardTitleStyle}>
                                         {item.title}
                                     </CardTitle>
@@ -66,7 +65,7 @@ class CardContainer extends Component {
                     <Row>
                         {secondRow.map(item => {
                             return (
-                                <Col sm={12 / slicePoint}>
+                                <Col sm={columnSize}>
                                     <CardTitle style={CardTitleStyle}>
                                         {item.title}
                                     </CardTitle>
