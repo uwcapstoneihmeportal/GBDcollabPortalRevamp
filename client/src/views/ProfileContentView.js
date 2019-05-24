@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Tabs, Tab, TabPanel, TabList } from 'react-web-tabs'
 
-import DetailsView from '../views/profileViews/DetailsView'
+import { DetailsView, AffiliationsView } from '../views/profileViews'
+// import AffiliationsView from '../views/profileViews/AffiliationsView'
 
 
 import 'react-web-tabs/dist/react-web-tabs.css'
