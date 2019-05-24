@@ -120,17 +120,17 @@ function mapStateToProps(state) {
                         value: state.auth.user.MailingState
                     },
                     {
-                        title: 'postal code',
-                        value: state.auth.user.MailingPostalCode
-                    },
-                    {
                         title: 'country',
                         value: state.auth.user.MailingCountry
                     },
                     {
+                        title: 'postal code',
+                        value: state.auth.user.MailingPostalCode
+                    },
+                    {
                         title: 'gbd region',
                         value: state.auth.user.GBD_Region__c
-                    },
+                    }
                 ]
             }
         ]

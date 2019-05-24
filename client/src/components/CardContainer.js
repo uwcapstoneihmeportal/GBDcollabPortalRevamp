@@ -28,7 +28,9 @@ class CardContainer extends Component {
         const { title, data } = this.props
 
         const numDataPoints = data.length
-        const slicePoint = numDataPoints % 2 == 0 ? numDataPoints / 2 : numDataPoints / 2 + 1
+        const slicePoint = data.length / 2
+
+        // const slicePoint = numDataPoints % 2 == 0 ? numDataPoints / 2 : numDataPoints / 2 + 1
 
         const firstThreeTitleLetters = title.slice(0, 3)
         const restOfTitle = title.slice(3)

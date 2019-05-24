@@ -38,9 +38,6 @@ class UserDropdown extends Component {
                     <img src={dropdownImage} alt="user" style={{...BaseImageStyle, ...DropdownImageStyle}}/>
                 </DropdownToggle>
                 <DropdownMenu>
-                    <DropdownItem header style={{fontSize: '20px', color: '#2F4F4F', textAlign: 'right'}}>
-                    {fullName}
-                    </DropdownItem>
                     <DropdownItem 
                         onClick={e => {this.props.history.push('/profile')}}
                     >
