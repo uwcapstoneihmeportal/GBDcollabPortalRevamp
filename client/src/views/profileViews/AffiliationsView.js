@@ -54,7 +54,7 @@ function mapStateToProps(state) {
                     },
                     {
                         title: 'country',
-                        value: state.auth.user.Primary_Affiliation_State_or_Province__c
+                        value: state.auth.user.Primary_Affiliation_Country__c
                     }
                 ]
             },
@@ -83,7 +83,7 @@ function mapStateToProps(state) {
                     },
                     {
                         title: 'country',
-                        value: state.auth.user.Secondary_Affiliation_State_or_Province__c
+                        value: state.auth.user.Primary_Affiliation_Country__c
                     }
                 ]
             }

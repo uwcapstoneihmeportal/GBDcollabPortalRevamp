@@ -4,6 +4,7 @@ import { Tabs, Tab, TabPanel, TabList } from 'react-web-tabs'
 
 import DetailsView from '../views/profileViews/DetailsView'
 import AffiliationsView from '../views/profileViews/AffiliationsView'
+import EngagmentView from '../views/profileViews/EngagmentView'
 
 import 'react-web-tabs/dist/react-web-tabs.css'
 
@@ -22,11 +23,11 @@ const tabs = [
     },
     {
         tabTitle: 'Affiliations',
-        content: <div></div>
+        content: <AffiliationsView />
     },
     {
         tabTitle: 'Engagment Details',
-        content: <div></div>
+        content: <EngagmentView />
     },
     {
         tabTitle: 'Area of Expertise',
@@ -34,10 +35,6 @@ const tabs = [
     },
     {
         tabTitle: 'Authorship Information',
-        content: <div></div>
-    },
-    {
-        tabTitle: 'Change Password',
         content: <div></div>
     }
 ]

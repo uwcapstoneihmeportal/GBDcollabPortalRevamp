@@ -79,7 +79,7 @@ function mapStateToProps(state) {
                     },
                     {
                         title: 'skype id',
-                        value: state.auth.user.Language_s_Spoken__c
+                        value: state.auth.user.Skype_ID__c
                     }
                 ]
             },
