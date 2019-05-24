@@ -51,11 +51,12 @@ class ProfileContentView extends Component {
                 style={ContainerStyle}
             >
                 <TabList style={this.props.style}>
-                    {/* TODO: FIX ME */}
                     {tabs.map(tab => {
                         let title = tab.tabTitle
                         return (
-                            <Tab key={title} tabFor={title}>{title}</Tab>
+                            <Tab key={title} tabFor={title}>
+                                {title}
+                            </Tab>
                         )
                     })}
                 </TabList>

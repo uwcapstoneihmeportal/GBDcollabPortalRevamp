@@ -39,19 +39,19 @@ class UserDropdown extends Component {
                 </DropdownToggle>
                 <DropdownMenu>
                     <DropdownItem header style={{fontSize: '20px', color: '#2F4F4F', textAlign: 'right'}}>
-                        {fullName}
+                    {fullName}
                     </DropdownItem>
                     <DropdownItem 
                         onClick={e => {this.props.history.push('/profile')}}
                     >
-                        View Profile
+                    View Profile
                     </DropdownItem>
                     <DropdownItem divider />
                     <DropdownItem 
                         onClick={e => {this.props.history.push('/')}}
                         style={{ color: 'red' }}
                     >
-                        Logout
+                    Logout
                     </DropdownItem>
                 </DropdownMenu>
             </UncontrolledDropdown>

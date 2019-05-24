@@ -30,79 +30,61 @@ function mapStateToProps(state) {
     return {
         cards: [
             {
-                title: 'Basic Information',
+                title: 'Primary Affiliation',
                 data: [
                     {
                         title: 'name',
-                        value: state.auth.user.Name
+                        value: "Generic U"
                     },
                     {
-                        title: 'gender',
-                        value: state.auth.user.Gender__c
+                        title: 'department',
+                        value: state.auth.user.Primary_Affiliation_Department__c
                     },
                     {
-                        title: 'age',
-                        value: state.auth.user.Age__c
+                        title: 'address',
+                        value: state.auth.user.Primary_Affiliation_Street_Address__c
                     },
                     {
-                        title: 'language(s)',
-                        value: state.auth.user.Language_s_Spoken__c
+                        title: 'city',
+                        value: state.auth.user.Primary_Affiliation_City__c
                     },
+                    {
+                        title: 'state or province',
+                        value: state.auth.user.Primary_Affiliation_State_or_Province__c
+                    },
+                    {
+                        title: 'country',
+                        value: state.auth.user.Primary_Affiliation_State_or_Province__c
+                    }
                 ]
             },
             {
-                title: 'Contact Information',
+                title: 'Secondary Affiliation',
                 data: [
                     {
-                       title: 'primary email',
-                       value: state.auth.user.Primary_Email__c 
+                        title: 'name',
+                        value: "Generic State"
                     },
                     {
-                        title: 'alternate email',
-                        value: state.auth.user.npe01__AlternateEmail__c
+                        title: 'department',
+                        value: state.auth.user.Secondary_Affiliation_Department__c
                     },
                     {
-                        title: 'phone',
-                        value: state.auth.user.Phone
+                        title: 'address',
+                        value: state.auth.user.Secondary_Affiliation_Street_Address__c
                     },
                     {
-                        title: 'skype id',
-                        value: state.auth.user.Language_s_Spoken__c
-                    },
-                ]
-            },
-            {
-                title: 'Work and Education',
-                data: [
-                    {
-                       title: 'highest degree',
-                       value: state.auth.user.Highest_Degree__c 
+                        title: 'city',
+                        value: state.auth.user.Secondary_Affiliation_City__c
                     },
                     {
-                        title: 'degree(s)',
-                        value: state.auth.user.Degree_s__c
+                        title: 'state or province',
+                        value: state.auth.user.Secondary_Affiliation_State_or_Province__c
                     },
                     {
-                        title: 'position',
-                        value: state.auth.user.Position__c
-                    },
-                ]
-            },
-            {
-                title: 'Location',
-                data: [
-                    {
-                       title: 'mailing address',
-                       value: state.auth.user.MailingAddress
-                    },
-                    {
-                        title: 'gbd region',
-                        value: state.auth.user.GBD_Region__c
-                    },
-                    {
-                        title: 'world bank income level',
-                        value: state.auth.user.World_Bank_Income_Level__c
-                    },
+                        title: 'country',
+                        value: state.auth.user.Secondary_Affiliation_State_or_Province__c
+                    }
                 ]
             }
         ]

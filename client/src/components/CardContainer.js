@@ -16,7 +16,7 @@ const CardTitleStyle = {
 
 const CardTextStyle = {
     color: 'black',
-    fontSize: '13pt',
+    fontSize: '13pt'
 }
 
 const CardContainerStyle = {
@@ -27,11 +27,14 @@ class CardContainer extends Component {
     render() {
         const { title, data } = this.props
 
+        const numDataPoints = data.length
+        const slicePoint = numDataPoints % 2 == 0 ? numDataPoints / 2 : numDataPoints / 2 + 1
+
         const firstThreeTitleLetters = title.slice(0, 3)
         const restOfTitle = title.slice(3)
 
-        const firstRow = data.slice(0, 2)
-        const secondRow = data.slice(2, data.length)
+        const firstRow = data.slice(0, slicePoint)
+        const secondRow = data.slice(slicePoint, data.length)
 
         return (
             <Card style={CardContainerStyle}>
@@ -46,7 +49,7 @@ class CardContainer extends Component {
                     <Row>
                         {firstRow.map(item => {
                             return (
-                                <Col sm="6">
+                                <Col sm={12 / slicePoint}>
                                     <CardTitle style={CardTitleStyle}>
                                         {item.title}
                                     </CardTitle>
@@ -61,7 +64,7 @@ class CardContainer extends Component {
                     <Row>
                         {secondRow.map(item => {
                             return (
-                                <Col sm="6">
+                                <Col sm={12 / slicePoint}>
                                     <CardTitle style={CardTitleStyle}>
                                         {item.title}
                                     </CardTitle>

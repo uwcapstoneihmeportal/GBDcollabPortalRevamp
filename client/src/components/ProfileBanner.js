@@ -52,7 +52,7 @@ function mapStateToProps(state) {
     return {
         firstName: state.auth.user.FirstName,
         position: state.auth.user.Position__c,
-        location: state.auth.user.GBD_Region__c
+        location: state.auth.user.MailingCountry + ", " + state.auth.user.MailingState
     }
 }
 
