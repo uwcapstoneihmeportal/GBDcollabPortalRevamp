@@ -62,8 +62,8 @@ class UserDropdown extends Component {
 // Redux
 function mapStateToProps(state) {
     return {
-        // firstName: state.auth.user.FirstName,
-        // lastName: state.auth.user.LastName
+        firstName: state.auth.user.FirstName,
+        lastName: state.auth.user.LastName
     }
 }
 

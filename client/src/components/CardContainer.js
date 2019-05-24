@@ -17,7 +17,6 @@ const CardTitleStyle = {
 const CardTextStyle = {
     color: 'black',
     fontSize: '13pt',
-    textTransform: 'capitalize'
 }
 
 const CardContainerStyle = {
@@ -26,34 +25,13 @@ const CardContainerStyle = {
 
 class CardContainer extends Component {
     render() {
-        // const info = this.props.info
-        const info = {
-            cardTitle: 'Basic Information',
-            data: [
-                {
-                    title: 'Name',
-                    text: 'Dr. Sam Johnson'
-                },
-                {
-                    title: 'Gender',
-                    text: 'Male'
-                },
-                {
-                    title: 'Age',
-                    text: '55-64'
-                },
-                {
-                    title: 'Language(s)',
-                    text: 'Spanish - Hindi - Korean'
-                },
-            ]
-        }
+        const { title, data } = this.props
 
-        const firstThreeTitleLetters = info.cardTitle.slice(0, 3)
-        const restOfTitle = info.cardTitle.slice(3)
+        const firstThreeTitleLetters = title.slice(0, 3)
+        const restOfTitle = title.slice(3)
 
-        const firstRow = info.data.slice(0, 2)
-        const secondRow = info.data.slice(2, info.data.length)
+        const firstRow = data.slice(0, 2)
+        const secondRow = data.slice(2, data.length)
 
         return (
             <Card style={CardContainerStyle}>
@@ -73,7 +51,7 @@ class CardContainer extends Component {
                                         {item.title}
                                     </CardTitle>
                                     <CardText style={CardTextStyle}>
-                                        {item.text}
+                                        {item.value}
                                     </CardText>
                                 </Col>
                             )
@@ -88,7 +66,7 @@ class CardContainer extends Component {
                                         {item.title}
                                     </CardTitle>
                                     <CardText style={CardTextStyle}>
-                                        {item.text}
+                                        {item.value}
                                     </CardText>
                                 </Col>
                             )

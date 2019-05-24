@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux'
 import ProfileNavbar from './ProfileNavBar'
 
 const jobIcon = require('../images/job.png')
@@ -24,18 +24,22 @@ const LabelStyle = {
 
 class ProfileBanner extends Component {
     render() {
+
+        const { firstName, position, location } = this.props
+        const greeting = "Hello, " + firstName + "!"
+
         return (
             <div style={BannerStyle}>
                 <ProfileNavbar />
-                <h1>Hello, Sam!</h1>
+                <h1>{greeting}</h1>
                 <div>
                     <img src={jobIcon} alt="job icon" style={ImageStyle} />
                     <span style={LabelStyle}>
-                        Health Specialist
+                        {position}
                     </span>
                     <img src={locationIcon} alt="location icon" style={ImageStyle} />
                     <span style={LabelStyle}>
-                        United States, WA
+                        {location}
                     </span>
                 </div>
             </div>
@@ -43,4 +47,13 @@ class ProfileBanner extends Component {
     }
 }
 
-export default ProfileBanner
+// Redux
+function mapStateToProps(state) {
+    return {
+        firstName: state.auth.user.FirstName,
+        position: state.auth.user.Position__c,
+        location: state.auth.user.GBD_Region__c
+    }
+}
+
+export default connect(mapStateToProps)(ProfileBanner)

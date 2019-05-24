@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Container, Row, Col } from 'react-bootstrap'
-import CardContainer from '../components/CardContainer'
-
+import { connect } from 'react-redux'
 import { Tabs, Tab, TabPanel, TabList } from 'react-web-tabs'
+
+import DetailsView from '../views/profileViews/DetailsView'
+
+
 import 'react-web-tabs/dist/react-web-tabs.css'
 
 const ContainerStyle = {
@@ -15,33 +17,33 @@ const ContainerStyle = {
 
 const tabs = [
     {
-        tabTitle: 'Profile',
-        content: [
-            <CardContainer />,
-            <CardContainer />
-        ]
+        tabTitle: 'Details',
+        content: <DetailsView />
     },
     {
         tabTitle: 'Affiliations',
-        content: [<div></div>]
+        content: <div></div>
     },
     {
         tabTitle: 'Engagment Details',
-        content: [<div></div>]
+        content: <div></div>
     },
+    {
+        tabTitle: 'Area of Expertise',
+        content: <div></div>
+    },
+    {
+        tabTitle: 'Authorship Information',
+        content: <div></div>
+    },
+    {
+        tabTitle: 'Change Password',
+        content: <div></div>
+    }
 ]
 
 class ProfileContentView extends Component {
     render() {
-        // let items = [
-        //     "Profile",
-        //     "Affiliations",
-        //     "Engagment Details",
-        //     "Area of Expertise",
-        //     "Authorship Information",
-        //     "System Information"
-        // ]
-
         return (
             <Tabs
                 defaultTab={this.props.default}
@@ -49,29 +51,24 @@ class ProfileContentView extends Component {
                 style={ContainerStyle}
             >
                 <TabList style={this.props.style}>
-                    {tabs.map(item => {
-                        let title = item.tabTitle
+                    {/* TODO: FIX ME */}
+                    {tabs.map(tab => {
+                        let title = tab.tabTitle
                         return (
                             <Tab key={title} tabFor={title}>{title}</Tab>
                         )
                     })}
                 </TabList>
+
                 {tabs.map(item => {
                     let title = item.tabTitle
-                    let content = item.content
                     return (
-                        <TabPanel key={title} tabId={title} style={{ width: '100%', marginLeft: '12vh' }}>
-                            <Container>
-                                {content.map(card => {
-                                    return (
-                                        <Row style={{marginBottom: '6vh'}}>
-                                            <Col xs="12">
-                                                {card}
-                                            </Col>
-                                        </Row>
-                                    )
-                                })}
-                            </Container>
+                        <TabPanel
+                            key={title}
+                            tabId={title}
+                            style={{ width: '100%', marginLeft: '12vh' }}
+                        >
+                            {item.content}
                         </TabPanel>
                     )
                 })}

@@ -24,7 +24,7 @@ const EditProfileButtonStyle = {
 }
 
 const tabs = [
-    {title: "Details", content: <ProfileContentView />},
+    {title: "Profile", content: <ProfileContentView />},
     {title: "Related", content: <div></div>}
 ]   
 
@@ -48,7 +48,7 @@ class ProfileView extends Component {
                         Edit Profile
                     </Button>
                     <UnderlinedTabs 
-                        default="Details"
+                        default="Profile"
                         tabs={tabs}
                         style={TabContainerStyle}
                     />
