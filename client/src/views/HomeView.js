@@ -47,7 +47,13 @@ class HomeView extends Component {
                     </Row>
                     <Row>
                         <Col sm="12">
-                            <div ref={(div) => { this.vizContainer = div }}>  </div>
+                            <h4 style={{ marginTop: '30px', marginBottom: '15px' }}>GBD Collaborator Interative Map</h4>
+                            <p>
+                                Explore the varies locations and expertise of GBD Collaborators below with the interactive map!
+                            </p>  
+                            <div ref={(div) => { this.vizContainer = div }} />  
+
+                            
                         </Col>
                     </Row>
                 </Container>
