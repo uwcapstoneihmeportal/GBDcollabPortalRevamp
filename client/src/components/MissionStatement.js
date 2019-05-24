@@ -5,7 +5,8 @@ const StatementStyle = {
     color: 'white',
     padding: "30px 50px 30px 50px",
     marginTop: '-75px',
-    width: '60%'
+    width: '60%',
+    position: 'relative'
 }
 
 class MissionStatement extends Component {

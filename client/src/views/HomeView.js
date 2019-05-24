@@ -8,13 +8,15 @@ import NavigationBar from '../components/NavigationBar'
 import MissionStatement from '../components/MissionStatement'
 import tableau from 'tableau-api'
 
+const bannerImage = require("../images/homeBanner.png")
+
 class HomeView extends Component {
     componentDidMount() {  
         this.initViz()  
     }  
 
     initViz() {  
-        const vizUrl = 'https://public.tableau.com/views/Test_15580954904920/Sheet1?:embed=y&:display_count=yes&publish=yes&:toolbar=no&:origin=viz_share_link';  
+        const vizUrl = 'https://public.tableau.com/profile/kevin.lim8147#!/vizhome/shared/MDSMNZPM2';  
         const vizContainer = this.vizContainer;  
         let viz = new window.tableau.Viz(vizContainer, vizUrl)  
     }  
@@ -30,10 +32,11 @@ class HomeView extends Component {
         return (
             <div>
                 <NavigationBar />
-                <div style={{
-                    backgroundColor: '#ADD8E6',
-                    height: '300px'}}>
-                </div>
+                <img 
+                    src={bannerImage} 
+                    alt="children"
+                    style={{ width: '100%', overflow: 'hidden'}}
+                />
                 <MissionStatement />
                 <Container>
                     <Row>
