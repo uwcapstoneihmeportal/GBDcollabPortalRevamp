@@ -16,7 +16,7 @@ class HomeView extends Component {
     }  
 
     initViz() {  
-        const vizUrl = 'https://public.tableau.com/profile/kevin.lim8147#!/vizhome/shared/MDSMNZPM2';  
+        const vizUrl = 'https://public.tableau.com/shared/MDSMNZPM2?:toolbar=no&:display_count=yes&:origin=viz_share_link';  
         const vizContainer = this.vizContainer;  
         let viz = new window.tableau.Viz(vizContainer, vizUrl)  
     }  
