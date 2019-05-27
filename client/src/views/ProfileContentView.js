@@ -7,6 +7,7 @@ import AffiliationsView from '../views/profileViews/AffiliationsView'
 import EngagementView from '../views/profileViews/EngagementView'
 
 import 'react-web-tabs/dist/react-web-tabs.css'
+import '../styles/profile.css'
 
 const ContainerStyle = {
     textAlign: 'left',

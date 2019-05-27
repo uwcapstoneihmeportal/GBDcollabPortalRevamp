@@ -26,7 +26,18 @@ class DetailsView extends Component {
     }
 }
 
+function formatPhoneNumber(phoneNumberString) {
+    var cleaned = ('' + phoneNumberString).replace(/\D/g, '')
+    var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/)
+    if (match) {
+        return '(' + match[1] + ') ' + match[2] + '-' + match[3]
+    }
+    return null
+}
+
 function mapStateToProps(state) {
+    let formattedPhoneNumber = formatPhoneNumber(state.auth.user.Phone)
+
     return {
         cards: [
             {
@@ -75,7 +86,7 @@ function mapStateToProps(state) {
                     },
                     {
                         title: 'phone',
-                        value: state.auth.user.Phone
+                        value: formattedPhoneNumber
                     },
                     {
                         title: 'skype id',

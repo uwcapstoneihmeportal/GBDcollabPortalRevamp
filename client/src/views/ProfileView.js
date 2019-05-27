@@ -58,9 +58,4 @@ class ProfileView extends Component {
     }
 }
 
-function mapStateToProps() {
-    return {
-    }
-}
-
-export default connect(mapStateToProps)(ProfileView)
+export default ProfileView
