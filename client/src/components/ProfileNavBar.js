@@ -20,9 +20,9 @@ class ProfileNavBar extends Component {
         return (
             <div>
                 <Navbar style={NavBarStyle} expand="md">
-                    {/* <NavbarBrand href="/home">
+                    <NavbarBrand href="/home">
                         <img src={brandImage} alt="IHME logo" style={BrandStyle}  />
-                    </NavbarBrand> */}
+                    </NavbarBrand>
                 </Navbar>
             </div>
         )

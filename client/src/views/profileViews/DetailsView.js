@@ -126,10 +126,6 @@ function mapStateToProps(state) {
                     {
                         title: 'postal code',
                         value: state.auth.user.MailingPostalCode
-                    },
-                    {
-                        title: 'gbd region',
-                        value: state.auth.user.GBD_Region__c
                     }
                 ]
             }

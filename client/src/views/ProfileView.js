@@ -41,12 +41,12 @@ class ProfileView extends Component {
             < div >
                 <ProfileBanner />
                 <div>
-                    {/* <Button 
+                    <Button 
                         style={EditProfileButtonStyle}
                         onClick={this.handleEditProfileClick.bind(this)}
                     >
                         Edit Profile
-                    </Button> */}
+                    </Button>
                     <UnderlinedTabs 
                         default="Profile"
                         tabs={tabs}
