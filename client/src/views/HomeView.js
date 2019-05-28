@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 
 // Components
 import NavigationBar from '../components/NavigationBar'
@@ -19,7 +19,7 @@ class HomeView extends Component {
         const vizUrl = 'https://public.tableau.com/shared/MDSMNZPM2?:toolbar=no&:display_count=yes&:origin=viz_share_link';  
         const vizContainer = this.vizContainer;  
         let viz = new window.tableau.Viz(vizContainer, vizUrl)  
-    }  
+    }
 
     render() {
         const { isAuthenticated } = this.props
@@ -72,4 +72,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(HomeView)
+export default withRouter(connect(mapStateToProps)(HomeView))

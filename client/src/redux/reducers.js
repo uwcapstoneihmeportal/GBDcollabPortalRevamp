@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from './actionTypes'
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, 
+    LOGOUT_FAILURE, LOGOUT_SUCCESS } from './actionTypes'
 
 const intitialState = {
     isFetching: false,
@@ -12,6 +13,8 @@ function authReducer(state = intitialState, action) {
         case LOGIN_REQUEST: 
         case LOGIN_SUCCESS: 
         case LOGIN_FAILURE: 
+        case LOGOUT_SUCCESS:
+        case LOGIN_FAILURE:
             return Object.assign({}, state,
                 action.data
             )

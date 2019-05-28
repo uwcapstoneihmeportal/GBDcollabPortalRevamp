@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 
-// Components
 import { Container, Row, Col, Form } from 'reactstrap'
 import LoadingOverlay from 'react-loading-overlay'
 import { DotLoader } from 'react-spinners'
@@ -10,36 +9,26 @@ import SignInBanner from '../components/SignInBanner'
 import CustomInput from '../components/CustomInput'
 import AuthButton from '../components/AuthButton'
 
-// Actions
-import { loginUser } from '../redux/actions'
+/////////// Actions ///////////
+import { loginUser, logoutUser } from '../redux/actions'
 
-// Styling
+/////////// Styling ///////////
 const H1Style = {
     textAlign: 'center',
     fontSize: '32px',
     fontWeight: 'bold'
 }
-
 const FormContainerStyle = {
     margin: 'auto',
     position: 'absloute',
     transform: 'translate(0%, 40%)'
 }
-
 const LoginErrorStyle = {
     color: 'red',
     textAlign: 'center'
 }
 
-// Redux
-function mapStateToProps(state) {
-    return {
-        isAuthenticated: state.auth.isAuthenticated,
-        isFetching: state.auth.isFetching,
-        error: state.auth.error
-    }
-}
-
+/////////// View ///////////
 class SignInView extends Component {
     constructor(props) {
         super(props)
@@ -49,7 +38,8 @@ class SignInView extends Component {
         }
         this.handleSubmit = this.handleSubmit.bind(this)
 
-        // TODO: logout user 
+        // logout user if they visit this page or come back to it
+        this.props.dispatch(logoutUser())
     }
 
     handleSubmit(event) {
@@ -68,7 +58,7 @@ class SignInView extends Component {
 
         // check to see if we are authenticated, if so, redirect to home page
         if (isAuthenticated && !isFetching) {
-            return (<Redirect to='/home' />)
+            return (<Redirect push to='/home' />)
         }
 
         return (
@@ -120,4 +110,13 @@ class SignInView extends Component {
     }
 }
 
-export default connect(mapStateToProps)(SignInView)
+//////////// Redux ////////////
+function mapStateToProps(state) {
+    return {
+        isAuthenticated: state.auth.isAuthenticated,
+        isFetching: state.auth.isFetching,
+        error: state.auth.error
+    }
+}
+
+export default withRouter(connect(mapStateToProps)(SignInView))

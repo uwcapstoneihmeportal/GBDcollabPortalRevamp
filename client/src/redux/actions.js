@@ -1,6 +1,7 @@
 // actions.js
 import { 
-    LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE
+    LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, 
+    LOGOUT_SUCCESS, LOGOUT_FAILURE
 } from './actionTypes' 
 
 function loginRequest(email, password) {
@@ -35,6 +36,25 @@ function loginFailure(errorMessage) {
         }
     }
 }
+
+function logoutSuccess() {
+    return {
+        type: LOGIN_SUCCESS,
+        data: {
+            isFetching: false,
+            isAuthenticated: false,
+        }
+    }
+}
+
+export function logoutUser() {
+    // do something with cached key
+
+    return dispatch => {
+        dispatch(logoutSuccess())
+    }
+}
+
 
 export function loginUser(email, password) {
     let config = {

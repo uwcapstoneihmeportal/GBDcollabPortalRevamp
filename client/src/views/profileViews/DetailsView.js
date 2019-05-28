@@ -70,7 +70,7 @@ function mapStateToProps(state) {
                 data: [
                     {
                         title: 'language(s)',
-                        value: state.auth.user.Language_s_Spoken__c.split(";").join("-")
+                        value: state.auth.user.Language_s_Spoken__c.split(";").join(" \u2022 ")
                     },
                     {
                         title: 'preferred contact type',
@@ -103,7 +103,7 @@ function mapStateToProps(state) {
                     },
                     {
                         title: 'degree(s)',
-                        value: state.auth.user.Degree_s__c.split(";").join("-")
+                        value: state.auth.user.Degree_s__c.split(";").join(' \u2022 ')
                     },
                     {
                         title: 'highest degree',
