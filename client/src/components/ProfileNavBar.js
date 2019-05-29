@@ -3,8 +3,6 @@ import { Navbar, NavbarBrand } from 'reactstrap';
 import { withRouter } from 'react-router-dom'
 import { Redirect } from 'react-router-dom'
 
-
-
 const NavBarStyle = {
     paddingTop: '10px',
     marginBottom: '0vh'
@@ -22,8 +20,12 @@ class ProfileNavBar extends Component {
         return (
             <div>
                 <Navbar style={NavBarStyle} expand="md">
-                    <NavbarBrand href="/home">
-                        <img src={brandImage} alt="IHME logo" style={BrandStyle}  />
+                    <NavbarBrand>
+                        <img 
+                            src={brandImage} 
+                            alt="IHME logo" 
+                            style={BrandStyle}
+                        />
                     </NavbarBrand>
                 </Navbar>
             </div>

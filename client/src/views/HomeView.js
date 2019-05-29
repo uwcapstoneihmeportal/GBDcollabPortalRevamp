@@ -3,7 +3,6 @@ import { Container, Row, Col } from 'reactstrap'
 import { connect } from 'react-redux'
 import { Redirect, withRouter } from 'react-router-dom'
 
-// Components
 import NavigationBar from '../components/NavigationBar'
 import MissionStatement from '../components/MissionStatement'
 import tableau from 'tableau-api'
@@ -55,8 +54,6 @@ class HomeView extends Component {
                                 Explore the varies locations and expertise of GBD Collaborators below with the interactive map!
                             </p>  
                             <div ref={(div) => { this.vizContainer = div }} />  
-
-                            
                         </Col>
                     </Row>
                 </Container>

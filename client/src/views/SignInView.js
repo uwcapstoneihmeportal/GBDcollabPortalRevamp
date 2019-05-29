@@ -9,10 +9,8 @@ import SignInBanner from '../components/SignInBanner'
 import CustomInput from '../components/CustomInput'
 import AuthButton from '../components/AuthButton'
 
-/////////// Actions ///////////
 import { loginUser, logoutUser } from '../redux/actions'
 
-/////////// Styling ///////////
 const H1Style = {
     textAlign: 'center',
     fontSize: '32px',
@@ -28,7 +26,6 @@ const LoginErrorStyle = {
     textAlign: 'center'
 }
 
-/////////// View ///////////
 class SignInView extends Component {
     constructor(props) {
         super(props)
@@ -110,7 +107,6 @@ class SignInView extends Component {
     }
 }
 
-//////////// Redux ////////////
 function mapStateToProps(state) {
     return {
         isAuthenticated: state.auth.isAuthenticated,

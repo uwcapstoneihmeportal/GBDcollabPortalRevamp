@@ -7,7 +7,6 @@ import AffiliationsView from '../views/profileViews/AffiliationsView'
 import EngagementView from '../views/profileViews/EngagementView'
 
 import 'react-web-tabs/dist/react-web-tabs.css'
-import '../styles/profile.css'
 
 const ContainerStyle = {
     textAlign: 'left',
@@ -52,7 +51,7 @@ class ProfileContentView extends Component {
                     {tabs.map(tab => {
                         let title = tab.tabTitle
                         return (
-                            <Tab key={title} tabFor={title}>
+                            <Tab key={title} tabFor={title} className="testing">
                                 {title}
                             </Tab>
                         )
