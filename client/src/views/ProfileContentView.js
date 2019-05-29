@@ -5,6 +5,7 @@ import { Tabs, Tab, TabPanel, TabList } from 'react-web-tabs'
 import DetailsView from '../views/profileViews/DetailsView'
 import AffiliationsView from '../views/profileViews/AffiliationsView'
 import EngagementView from '../views/profileViews/EngagementView'
+import ExpertiseView from '../views/profileViews/ExpertiseView'
 
 import 'react-web-tabs/dist/react-web-tabs.css'
 
@@ -31,7 +32,7 @@ const tabs = [
     },
     {
         tabTitle: 'Area of Expertise',
-        content: <div></div>
+        content: <ExpertiseView />
     },
     {
         tabTitle: 'Authorship Information',

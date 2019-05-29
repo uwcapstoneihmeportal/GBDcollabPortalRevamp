@@ -30,7 +30,7 @@ function mapStateToProps(state) {
     return {
         cards: [
             {
-                title: 'My Role & Interests',
+                title: 'Role & Interests',
                 data: [
                     {
                         title: 'how would you like to interact?',
@@ -41,7 +41,7 @@ function mapStateToProps(state) {
                         value: state.auth.user.GBD_Data_Collaboration_Involvement__c.split(";").join(" \u2022 ")
                     },
                     {
-                        title: 'present, teach, how, or discuss?',
+                        title: 'present, teach, show, or discuss?',
                         value: state.auth.user.Do_You_Present_Teach_Show_or_Discuss__c.split(";").join(" \u2022 ")
                     },
                     {
