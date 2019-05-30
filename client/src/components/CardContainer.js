@@ -49,13 +49,25 @@ class CardContainer extends Component {
                     <br/>
                     <Row>
                         {firstRow.map(item => {
+                            var val = item.value
+
+                            if (Array.isArray(val)) {
+                                val = (<ul>
+                                    {item.value.map(e => {
+                                        return (
+                                            <li>{e}</li>
+                                        )
+                                    })}
+                                </ul>)
+                            }
+
                             return (
                                 <Col sm={columnSize}>
                                     <CardTitle style={CardTitleStyle}>
                                         {item.title}
                                     </CardTitle>
                                     <CardText style={CardTextStyle}>
-                                        {item.value}
+                                        {val}
                                     </CardText>
                                 </Col>
                             )
@@ -64,13 +76,26 @@ class CardContainer extends Component {
                     <br/>
                     <Row>
                         {secondRow.map(item => {
+                            var val = item.value
+
+                            // creates list if val is array
+                            if (Array.isArray(val)) {
+                                val = (<ul>
+                                    {item.value.map(e => {
+                                        return (
+                                            <li>{e}</li>
+                                        )
+                                    })}
+                                </ul>)
+                            }
+
                             return (
                                 <Col sm={columnSize}>
                                     <CardTitle style={CardTitleStyle}>
                                         {item.title}
                                     </CardTitle>
                                     <CardText style={CardTextStyle}>
-                                        {item.value}
+                                        {val}
                                     </CardText>
                                 </Col>
                             )

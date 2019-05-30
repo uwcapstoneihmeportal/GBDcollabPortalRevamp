@@ -45,7 +45,7 @@ class ProfileView extends Component {
                         style={EditProfileButtonStyle}
                         onClick={this.handleEditProfileClick.bind(this)}
                     >
-                        Edit Profile
+                        Edit Profile Section
                     </Button>
                     <UnderlinedTabs 
                         default="Profile"

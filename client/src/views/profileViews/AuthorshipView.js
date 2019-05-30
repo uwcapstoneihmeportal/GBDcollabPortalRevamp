@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Container, Row, Col } from 'react-bootstrap'
 import CardContainer from '../../components/CardContainer'
 
-class ExpertiseView extends Component {
+class AuthorshipView extends Component {
     render() {
         const { cards } = this.props
 
@@ -26,34 +26,7 @@ class ExpertiseView extends Component {
     }
 }
 
-function cleanAndFilter(values, section, start, end) {
-    var results = []
-    const split = values.split(";")
-
-    var i;
-    for (i = start; i <= end; i++) {
-        var filtered = split.filter(val => {
-            const category = section + "." + i
-            return val.indexOf(category) == 0
-        })
-        results.push({
-            header: filtered.shift(),
-            //section: filtered.shift(),
-            vals: filtered
-        })
-    }
-    return results
-}
-
 function mapStateToProps(state) {
-    const commMatNeoNutri = state.auth.user.A_Comm_Mat_Neo_Nutri_Diseases__c
-    const nonCommunicable = state.auth.user.B_Non_communicable_Diseases__c
-    const injuries = state.auth.user.C_Injuries__c
-
-    var commMatNeoNutriCleaned = cleanAndFilter(commMatNeoNutri, "A", 1, 7)
-    var nonCommCleaned = cleanAndFilter(nonCommunicable, "B", 9, 12)
-    var injuresCleaned = cleanAndFilter(injuries, "C", 1, 1)
-
     return {
         cards: [
             {
@@ -61,7 +34,7 @@ function mapStateToProps(state) {
                 data: [
                     {
                         title: 'countries and territories',
-                        value: state.auth.user.Countries_and_Territories__c.split(";").join(" \u2022 ")
+                        value: state.auth.user.Countries_and_Territories__c.split(";")
                     },
                     {
                         title: 'demography',
@@ -158,4 +131,4 @@ function mapStateToProps(state) {
 }
 
 
-export default connect(mapStateToProps)(ExpertiseView)
+export default connect(mapStateToProps)(AuthorshipView)
