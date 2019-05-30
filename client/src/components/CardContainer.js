@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import { Card, CardBody, CardTitle, CardText, Row, Col } from 'reactstrap';
 
+let editButtonImage = require('../images/edit.png')
+const EditStyle = {
+    width: '90%',
+    cursor: 'pointer'
+}
+
+
 const CardHeaderStyle = {
     color: '#696969'
 }
@@ -39,14 +46,26 @@ class CardContainer extends Component {
 
         return (
             <Card style={CardContainerStyle}>
-                <CardBody style={{ paddingLeft: '8vh' }}>                    
-                    <h2 style={CardHeaderStyle}>
-                        <span style={CardHeaderSpanStyle}>
-                            {firstThreeTitleLetters}
-                        </span>
-                        {restOfTitle}
-                    </h2>
-                    <br/>
+                <CardBody style={{ paddingLeft: '8vh' }}>
+                    <Row>
+                        <Col sm="11">
+                            <h2 style={CardHeaderStyle}>
+                                <span style={CardHeaderSpanStyle}>
+                                    {firstThreeTitleLetters}
+                                </span>
+                                {restOfTitle}
+                            </h2>
+                        </Col>
+                        <Col sm="1">
+                            <img 
+                                src={editButtonImage} 
+                                alt=""
+                                style={EditStyle}
+                                onClick={e => {console.log("image clicked!")}}
+                            />
+                        </Col>
+                    </Row>
+                    <br />
                     <Row>
                         {firstRow.map(item => {
                             var val = item.value
@@ -73,7 +92,7 @@ class CardContainer extends Component {
                             )
                         })}
                     </Row>
-                    <br/>
+                    <br />
                     <Row>
                         {secondRow.map(item => {
                             var val = item.value

@@ -38,7 +38,6 @@ function cleanAndFilter(values, section, start, end) {
         })
         results.push({
             header: filtered.shift(),
-            //section: filtered.shift(),
             vals: filtered
         })
     }
