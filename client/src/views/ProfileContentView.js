@@ -6,6 +6,7 @@ import DetailsView from '../views/profileViews/DetailsView'
 import AffiliationsView from '../views/profileViews/AffiliationsView'
 import EngagementView from '../views/profileViews/EngagementView'
 import ExpertiseView from '../views/profileViews/ExpertiseView'
+import AuthorshipView from '../views/profileViews/AuthorshipView'
 
 import 'react-web-tabs/dist/react-web-tabs.css'
 
@@ -36,7 +37,7 @@ const tabs = [
     },
     {
         tabTitle: 'Authorship Information',
-        content: <div></div>
+        content: <AuthorshipView />
     }
 ]
 
