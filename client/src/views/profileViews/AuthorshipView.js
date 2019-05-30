@@ -27,6 +27,8 @@ class AuthorshipView extends Component {
 }
 
 function mapStateToProps(state) {
+    console.log(state)
+
     return {
         cards: [
             {
@@ -34,27 +36,14 @@ function mapStateToProps(state) {
                 data: [
                     {
                         title: 'authorship form sent',
-                        value: state.auth.user.GBD_2017_Topic_Authorship_Form__c.split(";")
+                        value: state.auth.user.GBD_2017_Capstone_Authorship_Form__c.split(";")
                     },
                     {
                         title: 'authored on',
-                        value: state.auth.user.GBD_2017_Topic_Authorship__c.split(";")
+                        value: state.auth.user.GBD_2017_Capstone_Authorship__c.split(";")
                     },
                 ]
-            },
-            {
-                title: 'GBD 2016',
-                data: [
-                    {
-                        title: 'authorship form sent',
-                        value: state.auth.user.GBD_2016_Topic_Authorship_Form__c.split(";")
-                    },
-                    {
-                        title: 'authored on',
-                        value: state.auth.user.GBD_2016_Topic_Authorship__c.split(";")
-                    },
-                ]
-            },
+            }
         ]
     }
 }

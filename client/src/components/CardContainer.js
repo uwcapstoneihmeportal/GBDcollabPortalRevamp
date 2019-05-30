@@ -36,13 +36,13 @@ class CardContainer extends Component {
 
         const numDataPoints = data.length
         const slicePoint = numDataPoints % 2 == 0 ? numDataPoints / 2 : Math.floor(numDataPoints / 2 + 1)
-        const columnSize = 12 / slicePoint
-
+        const columnSize = slicePoint < 2 ? 6 : 12 /slicePoint
+    
         const firstThreeTitleLetters = title.slice(0, 3)
         const restOfTitle = title.slice(3)
 
-        const firstRow = data.slice(0, slicePoint)
-        const secondRow = data.slice(slicePoint, data.length)
+        const firstRow = numDataPoints > 2 ? data.slice(0, slicePoint) : data
+        const secondRow = numDataPoints > 2 ? data.slice(slicePoint, data.length) : []
 
         return (
             <Card style={CardContainerStyle}>
@@ -61,7 +61,6 @@ class CardContainer extends Component {
                                 src={editButtonImage} 
                                 alt=""
                                 style={EditStyle}
-                                onClick={e => {console.log("image clicked!")}}
                             />
                         </Col>
                     </Row>
@@ -97,7 +96,6 @@ class CardContainer extends Component {
                         {secondRow.map(item => {
                             var val = item.value
 
-                            // creates list if val is array
                             if (Array.isArray(val)) {
                                 val = (<ul>
                                     {item.value.map(e => {

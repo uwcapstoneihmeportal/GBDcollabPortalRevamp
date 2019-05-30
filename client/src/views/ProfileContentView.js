@@ -37,7 +37,7 @@ const tabs = [
     },
     {
         tabTitle: 'Authorship Information',
-        content: <div></div>
+        content: <AuthorshipView />
     }
 ]
 
