@@ -7,7 +7,6 @@ const EditStyle = {
     cursor: 'pointer'
 }
 
-
 const CardHeaderStyle = {
     color: '#696969'
 }
@@ -31,6 +30,12 @@ const CardContainerStyle = {
 }
 
 class CardContainer extends Component {
+    handleEditPressed() {
+        const { title, data } = this.props
+        console.log("Handle Edit Pressed on Card Container")
+        this.props.onEditClicked(title, data)
+    }
+
     render() {
         const { title, data } = this.props
 
@@ -61,6 +66,7 @@ class CardContainer extends Component {
                                 src={editButtonImage} 
                                 alt=""
                                 style={EditStyle}
+                                onClick={this.handleEditPressed.bind(this)}
                             />
                         </Col>
                     </Row>

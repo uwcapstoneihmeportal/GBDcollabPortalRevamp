@@ -27,8 +27,6 @@ class AuthorshipView extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log(state)
-
     return {
         cards: [
             {
@@ -47,6 +45,5 @@ function mapStateToProps(state) {
         ]
     }
 }
-
 
 export default connect(mapStateToProps)(AuthorshipView)

@@ -2,26 +2,51 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Container, Row, Col } from 'react-bootstrap'
 import CardContainer from '../../components/CardContainer'
+import EditModal from '../../components/EditModal'
+
+import { openModal, closeModal } from '../../redux/actions'
 
 class DetailsView extends Component {
+    displayEditModal(title, data) {
+        console.log(title)
+        console.log(data)
+
+        this.props.dispatch(openModal())
+    }
+
+    closeModal() {
+        this.props.dispatch(closeModal())
+    }
+
     render() {
-        const { cards } = this.props
+        const { isEditModalOpen, cards } = this.props
 
         return (
-            <Container>
-                {cards.map(card => {
-                    return (
-                        <Row style={{ marginBottom: '6vh' }}>
-                            <Col xs="12">
-                                <CardContainer
-                                    title={card.title}
-                                    data={card.data}
-                                />
-                            </Col>
-                        </Row>
-                    )
-                })}
-            </Container>
+            <div>
+                {/* Modal View displayed when editing */}
+                <EditModal
+                    show={isEditModalOpen}
+                    onClose={this.closeModal.bind(this)}
+                >
+                     
+                </EditModal>
+
+                <Container>
+                    {cards.map(card => {
+                        return (
+                            <Row style={{ marginBottom: '6vh' }}>
+                                <Col xs="12">
+                                    <CardContainer
+                                        title={card.title}
+                                        data={card.data}
+                                        onEditClicked={this.displayEditModal.bind(this)}
+                                    />
+                                </Col>
+                            </Row>
+                        )
+                    })}
+                </Container>
+            </div>
         )
     }
 }
@@ -39,6 +64,7 @@ function mapStateToProps(state) {
     let formattedPhoneNumber = formatPhoneNumber(state.auth.user.Phone)
 
     return {
+        isEditModalOpen: state.auth.isEditModalOpen,
         cards: [
             {
                 title: 'Basic Information',

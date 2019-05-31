@@ -1,7 +1,7 @@
 // actions.js
 import { 
     LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, 
-    LOGOUT_SUCCESS, LOGOUT_FAILURE
+    LOGOUT_SUCCESS, LOGOUT_FAILURE, OPEN_EDIT_MODAL, CLOSE_EDIT_MODAL
 } from './actionTypes' 
 
 function loginRequest(email, password) {
@@ -44,6 +44,36 @@ function logoutSuccess() {
             isFetching: false,
             isAuthenticated: false,
         }
+    }
+}
+
+function openEditModal() {
+    return {
+        type: OPEN_EDIT_MODAL,
+        data: {
+            isEditModalOpen: true
+        }
+    }
+}
+
+function closeEditModal() {
+    return {
+        type: CLOSE_EDIT_MODAL,
+        data: {
+            isEditModalOpen: false
+        }
+    }
+}
+
+export function closeModal() {
+    return dispatch => {
+        dispatch(closeEditModal())
+    }
+}
+
+export function openModal() {
+    return dispatch => {
+        dispatch(openEditModal())
     }
 }
 

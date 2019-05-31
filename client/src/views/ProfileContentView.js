@@ -44,35 +44,37 @@ const tabs = [
 class ProfileContentView extends Component {
     render() {
         return (
-            <Tabs
-                defaultTab={this.props.default}
-                vertical
-                style={ContainerStyle}
-            >
-                <TabList style={this.props.style}>
-                    {tabs.map(tab => {
-                        let title = tab.tabTitle
+            <div>
+                <Tabs
+                    defaultTab={this.props.default}
+                    vertical
+                    style={ContainerStyle}
+                >
+                    <TabList style={this.props.style}>
+                        {tabs.map(tab => {
+                            let title = tab.tabTitle
+                            return (
+                                <Tab key={title} tabFor={title}>
+                                    {title}
+                                </Tab>
+                            )
+                        })}
+                    </TabList>
+
+                    {tabs.map(item => {
+                        let title = item.tabTitle
                         return (
-                            <Tab key={title} tabFor={title} className="testing">
-                                {title}
-                            </Tab>
+                            <TabPanel
+                                key={title}
+                                tabId={title}
+                                style={{ width: '100%', marginLeft: '12vh' }}
+                            >
+                                {item.content}
+                            </TabPanel>
                         )
                     })}
-                </TabList>
-
-                {tabs.map(item => {
-                    let title = item.tabTitle
-                    return (
-                        <TabPanel
-                            key={title}
-                            tabId={title}
-                            style={{ width: '100%', marginLeft: '12vh' }}
-                        >
-                            {item.content}
-                        </TabPanel>
-                    )
-                })}
-            </Tabs>
+                </Tabs>
+            </div>
         )
     }
 }
