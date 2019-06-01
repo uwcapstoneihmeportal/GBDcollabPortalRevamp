@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Container, Row, Col, Form } from 'reactstrap'
+import { Container, Row, Col, Form, FormGroup, Input } from 'reactstrap'
 
 // The gray background
 const BackdropStyle = {
@@ -61,14 +61,19 @@ class EditModal extends Component {
                 <div  style={ModalStyle}>
                     <Container>
                         <h1 style={{ textAlign: 'center', color: '#696969' }}>{this.props.title}</h1>
+                        <p style={{ textAlign: 'center', color: '#696969' }}>Provide a value only for the information you want to change</p>
                         {this.props.data.map(field => {
                             return (
-                                <Row style={{paddingTop: '2vh', paddingBottom: '2vh'}}>
+                                <Row style={{paddingTop: '1vh', paddingBottom: '1vh'}}>
                                     <Col sm="3">
                                         <p style={TitleStyle}>{field.title}</p>
                                     </Col>
                                     <Col sm="9">
-                                        <p>{field.value}</p>
+                                        <Form>
+                                            <FormGroup>
+                                                <Input placeholder={field.value} />
+                                            </FormGroup>
+                                        </Form>
                                     </Col>
                                 </Row>
                             )
