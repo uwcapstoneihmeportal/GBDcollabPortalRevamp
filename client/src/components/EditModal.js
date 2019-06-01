@@ -24,7 +24,7 @@ const ModalStyle = {
     padding: 30,
     zIndex: 11,
     overflowY: 'auto',
-    maxHeight: '80vh'
+    maxHeight: '85vh'
 }
 
 const SaveButtonStyle = {
@@ -38,6 +38,7 @@ const SaveButtonStyle = {
 const CancelButtonStyle = {
     backgroundColor: '#C0C0C0 ',
     borderRadius: '10px',
+    color: 'white',
     padding: '2vh',
     width: '100%'
 }
