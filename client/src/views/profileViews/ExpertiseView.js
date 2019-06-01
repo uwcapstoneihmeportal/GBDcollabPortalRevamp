@@ -60,27 +60,33 @@ function mapStateToProps(state) {
                 data: [
                     {
                         title: 'countries and territories',
-                        value: state.auth.user.Countries_and_Territories__c.split(";").join(" \u2022 ")
+                        value: state.auth.user.Countries_and_Territories__c.split(";").join(" \u2022 "),
+                        field: 'Countries_and_Territories__c'
                     },
                     {
                         title: 'demography',
-                        value: state.auth.user.Demography_Expert__c.split(";").join(" \u2022 ")
+                        value: state.auth.user.Demography_Expert__c.split(";").join(" \u2022 "),
+                        field: 'Demography_Expert__c'
                     },
                     {
                         title: 'risk factors',
-                        value: state.auth.user.Risk_Factors__c.split(";").join(" \u2022 ")
+                        value: state.auth.user.Risk_Factors__c.split(";").join(" \u2022 "),
+                        field: 'Risk_Factors__c'
                     },
                     {
                         title: 'impairments',
-                        value: state.auth.user.Impairments__c.split(";").join(" \u2022 ")
+                        value: state.auth.user.Impairments__c.split(";").join(" \u2022 "),
+                        field: 'Impairments__c'
                     },
                     {
                         title: 'health systems',
-                        value: state.auth.user.Health_Systems_Expert__c.split(";").join(" \u2022 ")
+                        value: state.auth.user.Health_Systems_Expert__c.split(";").join(" \u2022 "),
+                        field: 'Health_Systems_Expert__c'
                     },
                     {
                         title: 'disease registry',
-                        value: state.auth.user.Disease_Registry_Expert__c.split(";").join(" \u2022 ")
+                        value: state.auth.user.Disease_Registry_Expert__c.split(";").join(" \u2022 "),
+                        field: 'Disease_Registry_Expert__c'
                     }
                 ]
             },

@@ -11,7 +11,7 @@ class DetailsView extends Component {
         console.log(title)
         console.log(data)
 
-        this.props.dispatch(openModal())
+        this.props.dispatch(openModal(title, data))
     }
 
     closeModal() {
@@ -19,7 +19,7 @@ class DetailsView extends Component {
     }
 
     render() {
-        const { isEditModalOpen, cards } = this.props
+        const { isEditModalOpen, cards, modalTitle, modalData } = this.props
 
         return (
             <div>
@@ -27,9 +27,9 @@ class DetailsView extends Component {
                 <EditModal
                     show={isEditModalOpen}
                     onClose={this.closeModal.bind(this)}
-                >
-                     
-                </EditModal>
+                    title={modalTitle}
+                    data={modalData}
+                />
 
                 <Container>
                     {cards.map(card => {
@@ -63,31 +63,40 @@ function formatPhoneNumber(phoneNumberString) {
 function mapStateToProps(state) {
     let formattedPhoneNumber = formatPhoneNumber(state.auth.user.Phone)
 
+    console.log(state)
+
     return {
         isEditModalOpen: state.auth.isEditModalOpen,
+        modalTitle: state.auth.modalTitle,
+        modalData: state.auth.modalData,
         cards: [
             {
                 title: 'Basic Information',
                 data: [
                     {
                         title: 'prefix',
-                        value: state.auth.user.Prefix__c
+                        value: state.auth.user.Prefix__c,
+                        field: 'Prefix__c'
                     },
                     {
                         title: 'first name',
-                        value: state.auth.user.FirstName
+                        value: state.auth.user.FirstName,
+                        field: 'FirstName'
                     },
                     {
                         title: 'last name',
-                        value: state.auth.user.LastName
+                        value: state.auth.user.LastName,
+                        field: 'LastName'
                     },
                     {
                         title: 'gender',
-                        value: state.auth.user.Gender__c
+                        value: state.auth.user.Gender__c,
+                        field: 'Gender__c'
                     },
                     {
                         title: 'age',
-                        value: state.auth.user.Age__c
+                        value: state.auth.user.Age__c,
+                        field: 'Age__c'
                     }
                 ]
             },
@@ -96,27 +105,33 @@ function mapStateToProps(state) {
                 data: [
                     {
                         title: 'language(s)',
-                        value: state.auth.user.Language_s_Spoken__c.split(";").join(" \u2022 ")
+                        value: state.auth.user.Language_s_Spoken__c.split(";").join(" \u2022 "),
+                        field: 'Language_s_Spoken__c'
                     },
                     {
                         title: 'preferred contact type',
-                        value: state.auth.user.What_is_the_Best_Way_to_Contact_You__c
+                        value: state.auth.user.What_is_the_Best_Way_to_Contact_You__c,
+                        field: 'What_is_the_Best_Way_to_Contact_You__c'
                     },
                     {
                         title: 'primary email',
-                        value: state.auth.user.Primary_Email__c
+                        value: state.auth.user.Primary_Email__c,
+                        field: 'Primary_Email__c'
                     },
                     {
                         title: 'alternate email',
-                        value: state.auth.user.npe01__AlternateEmail__c
+                        value: state.auth.user.npe01__AlternateEmail__c,
+                        field: 'npe01__AlternateEmail__c'
                     },
                     {
                         title: 'phone',
-                        value: formattedPhoneNumber
+                        value: formattedPhoneNumber,
+                        field: 'Phone'
                     },
                     {
                         title: 'skype id',
-                        value: state.auth.user.Skype_ID__c
+                        value: state.auth.user.Skype_ID__c,
+                        field: 'Skype_ID__c'
                     }
                 ]
             },
@@ -125,19 +140,23 @@ function mapStateToProps(state) {
                 data: [
                     {
                         title: 'position',
-                        value: state.auth.user.Position__c
+                        value: state.auth.user.Position__c,
+                        field: 'Position__c'
                     },
                     {
                         title: 'degree(s)',
-                        value: state.auth.user.Degree_s__c.split(";").join(' \u2022 ')
+                        value: state.auth.user.Degree_s__c.split(";").join(' \u2022 '),
+                        field: 'Degree_s__c'
                     },
                     {
                         title: 'highest degree',
-                        value: state.auth.user.Highest_Degree__c
+                        value: state.auth.user.Highest_Degree__c,
+                        field: 'Highest_Degree__c'
                     },
                     {
                         title: 'previous cycle',
-                        value: state.auth.user.Author_on_Previous_Cycle__c
+                        value: state.auth.user.Author_on_Previous_Cycle__c,
+                        field: 'Author_on_Previous_Cycle__c'
                     },
                 ]
             },
@@ -146,23 +165,28 @@ function mapStateToProps(state) {
                 data: [
                     {
                         title: 'street',
-                        value: state.auth.user.MailingStreet
+                        value: state.auth.user.MailingStreet,
+                        field: 'MailingStreet'
                     },
                     {
                         title: 'city',
-                        value: state.auth.user.MailingCity
+                        value: state.auth.user.MailingCity,
+                        field: 'MailingCity'
                     },
                     {
                         title: 'state',
-                        value: state.auth.user.MailingState
+                        value: state.auth.user.MailingState,
+                        field: 'MailingState'
                     },
                     {
                         title: 'country',
-                        value: state.auth.user.MailingCountry
+                        value: state.auth.user.MailingCountry,
+                        field: 'MailingCountry'
                     },
                     {
                         title: 'postal code',
-                        value: state.auth.user.MailingPostalCode
+                        value: state.auth.user.MailingPostalCode,
+                        field: 'MailingPostalCode'
                     }
                 ]
             }

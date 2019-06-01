@@ -47,11 +47,13 @@ function logoutSuccess() {
     }
 }
 
-function openEditModal() {
+function openEditModal(title, data) {
     return {
         type: OPEN_EDIT_MODAL,
         data: {
-            isEditModalOpen: true
+            isEditModalOpen: true,
+            modalTitle: title,
+            modalData: data
         }
     }
 }
@@ -71,9 +73,9 @@ export function closeModal() {
     }
 }
 
-export function openModal() {
+export function openModal(title, data) {
     return dispatch => {
-        dispatch(openEditModal())
+        dispatch(openEditModal(title, data))
     }
 }
 

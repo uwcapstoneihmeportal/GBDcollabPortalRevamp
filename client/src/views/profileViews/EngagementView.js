@@ -34,19 +34,23 @@ function mapStateToProps(state) {
                 data: [
                     {
                         title: 'how would you like to interact?',
-                        value: state.auth.user.How_Would_You_Like_to_Interact__c.split(";").join(" \u2022 ")
+                        value: state.auth.user.How_Would_You_Like_to_Interact__c.split(";").join(" \u2022 "),
+                        field: 'How_Would_You_Like_to_Interact__c'
                     },
                     {
                         title: 'your involvement',
-                        value: state.auth.user.GBD_Data_Collaboration_Involvement__c.split(";").join(" \u2022 ")
+                        value: state.auth.user.GBD_Data_Collaboration_Involvement__c.split(";").join(" \u2022 "),
+                        field: 'GBD_Data_Collaboration_Involvement__c'
                     },
                     {
                         title: 'present, teach, show, or discuss?',
-                        value: state.auth.user.Do_You_Present_Teach_Show_or_Discuss__c.split(";").join(" \u2022 ")
+                        value: state.auth.user.Do_You_Present_Teach_Show_or_Discuss__c.split(";").join(" \u2022 "),
+                        field: 'Do_You_Present_Teach_Show_or_Discuss__c'
                     },
                     {
                         title: 'regularly used tools',
-                        value: state.auth.user.Regularly_Used_IHME_Tools__c.split(";").join(" \u2022 ")
+                        value: state.auth.user.Regularly_Used_IHME_Tools__c.split(";").join(" \u2022 "),
+                        field: 'Regularly_Used_IHME_Tools__c'
                     }
                 ]
             },
@@ -55,19 +59,23 @@ function mapStateToProps(state) {
                 data: [
                     {
                         title: 'how did you hear about the gbd network?',
-                        value: state.auth.user.How_Did_You_Hear_About_the_Network__c.split(";").join(" \u2022 ")
+                        value: state.auth.user.How_Did_You_Hear_About_the_Network__c.split(";").join(" \u2022 "),
+                        field: 'How_Did_You_Hear_About_the_Network__c'
                     },
                     {
                         title: 'gdb 2019 participation',
-                        value: state.auth.user.GBD_2019_Participation__c
+                        value: state.auth.user.GBD_2019_Participation__c,
+                        field: 'GBD_2019_Participation__c'
                     },
                     {
                         title: 'policy engagement',
-                        value: state.auth.user.Policy_Engagement__c.split(";").join(" \u2022 ")
+                        value: state.auth.user.Policy_Engagement__c.split(";").join(" \u2022 "),
+                        field: 'Policy_Engagement__c'
                     },
                     {
                         title: 'which gbd activity or event?',
-                        value: state.auth.user.Which_GBD_Activity_or_Event__c.split(";").join(" \u2022 ")
+                        value: state.auth.user.Which_GBD_Activity_or_Event__c.split(";").join(" \u2022 "),
+                        field: 'Which_GBD_Activity_or_Event__c'
                     }
                 ]
             }

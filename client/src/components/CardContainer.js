@@ -37,7 +37,7 @@ class CardContainer extends Component {
     }
 
     render() {
-        const { title, data } = this.props
+        const { title, data, onEditClicked } = this.props
 
         const numDataPoints = data.length
         const slicePoint = numDataPoints % 2 == 0 ? numDataPoints / 2 : Math.floor(numDataPoints / 2 + 1)
@@ -49,11 +49,24 @@ class CardContainer extends Component {
         const firstRow = numDataPoints > 2 ? data.slice(0, slicePoint) : data
         const secondRow = numDataPoints > 2 ? data.slice(slicePoint, data.length) : []
 
+        const editButton = onEditClicked ? (
+            <Col sm="1">
+                <img 
+                    src={editButtonImage} 
+                    alt=""
+                    style={EditStyle}
+                    onClick={this.handleEditPressed.bind(this)}
+                />
+            </Col>
+        ) : null
+
+        const headerColumnSize = editButton ? "11" : "12" 
+
         return (
             <Card style={CardContainerStyle}>
                 <CardBody style={{ paddingLeft: '8vh' }}>
                     <Row>
-                        <Col sm="11">
+                        <Col sm={headerColumnSize}>
                             <h2 style={CardHeaderStyle}>
                                 <span style={CardHeaderSpanStyle}>
                                     {firstThreeTitleLetters}
@@ -61,14 +74,7 @@ class CardContainer extends Component {
                                 {restOfTitle}
                             </h2>
                         </Col>
-                        <Col sm="1">
-                            <img 
-                                src={editButtonImage} 
-                                alt=""
-                                style={EditStyle}
-                                onClick={this.handleEditPressed.bind(this)}
-                            />
-                        </Col>
+                        {editButton ? editButton : ''}
                     </Row>
                     <br />
                     <Row>

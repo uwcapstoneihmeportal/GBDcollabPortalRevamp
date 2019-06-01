@@ -34,27 +34,32 @@ function mapStateToProps(state) {
                 data: [
                     {
                         title: 'name',
-                        value: "Generic U"
+                        value: 'Generic U'
                     },
                     {
                         title: 'department',
-                        value: state.auth.user.Primary_Affiliation_Department__c
+                        value: state.auth.user.Primary_Affiliation_Department__c,
+                        field: 'Primary_Affiliation_Department__c'
                     },
                     {
                         title: 'address',
-                        value: state.auth.user.Primary_Affiliation_Street_Address__c
+                        value: state.auth.user.Primary_Affiliation_Street_Address__c,
+                        field: 'Primary_Affiliation_Street_Address__c'
                     },
                     {
                         title: 'city',
-                        value: state.auth.user.Primary_Affiliation_City__c
+                        value: state.auth.user.Primary_Affiliation_City__c,
+                        field: 'Primary_Affiliation_City__c'
                     },
                     {
                         title: 'state or province',
-                        value: state.auth.user.Primary_Affiliation_State_or_Province__c
+                        value: state.auth.user.Primary_Affiliation_State_or_Province__c,
+                        field: 'Primary_Affiliation_State_or_Province__c'
                     },
                     {
                         title: 'country',
-                        value: state.auth.user.Primary_Affiliation_Country__c
+                        value: state.auth.user.Primary_Affiliation_Country__c,
+                        field: 'Primary_Affiliation_Country__c'
                     }
                 ]
             },
@@ -67,23 +72,28 @@ function mapStateToProps(state) {
                     },
                     {
                         title: 'department',
-                        value: state.auth.user.Secondary_Affiliation_Department__c
+                        value: state.auth.user.Secondary_Affiliation_Department__c,
+                        field: 'Secondary_Affiliation_Department__c'
                     },
                     {
                         title: 'address',
-                        value: state.auth.user.Secondary_Affiliation_Street_Address__c
+                        value: state.auth.user.Secondary_Affiliation_Street_Address__c,
+                        field: 'Secondary_Affiliation_Street_Address__c'
                     },
                     {
                         title: 'city',
-                        value: state.auth.user.Secondary_Affiliation_City__c
+                        value: state.auth.user.Secondary_Affiliation_City__c,
+                        field: 'Secondary_Affiliation_City__c'
                     },
                     {
                         title: 'state or province',
-                        value: state.auth.user.Secondary_Affiliation_State_or_Province__c
+                        value: state.auth.user.Secondary_Affiliation_State_or_Province__c,
+                        field: 'Secondary_Affiliation_State_or_Province__c'
                     },
                     {
                         title: 'country',
-                        value: state.auth.user.Primary_Affiliation_Country__c
+                        value: state.auth.user.Primary_Affiliation_Country__c,
+                        field: 'Primary_Affiliation_Country__c'
                     }
                 ]
             }
