@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { Button } from 'reactstrap'
 import ProfileContentView from './ProfileContentView'
 import ProfileBanner from '../components/ProfileBanner'
 import UnderlinedTabs from '../components/UnderlinedTabs'

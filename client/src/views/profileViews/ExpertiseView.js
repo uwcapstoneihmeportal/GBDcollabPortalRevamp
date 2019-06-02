@@ -34,7 +34,7 @@ function cleanAndFilter(values, section, start, end) {
     for (i = start; i <= end; i++) {
         var filtered = split.filter(val => {
             const category = section + "." + i
-            return val.indexOf(category) == 0
+            return val.indexOf(category) === 0
         })
         results.push({
             header: filtered.shift(),

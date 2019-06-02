@@ -1,8 +1,8 @@
 // actions.js
 import { 
     LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, 
-    LOGOUT_SUCCESS, LOGOUT_FAILURE, OPEN_EDIT_MODAL, CLOSE_EDIT_MODAL, 
-    UPDATE_PROFILE_REQUEST, UPDATE_PROFILE_SUCCESS
+    OPEN_EDIT_MODAL, CLOSE_EDIT_MODAL, 
+    UPDATE_PROFILE_REQUEST
 } from './actionTypes' 
 
 function loginRequest(email, password) {
@@ -203,6 +203,7 @@ export function updateContactData(metaData, fields) {
                 case 204: // success (no content returned)
                     // go update fetch user data
                     dispatch(fetchContactData(metaData)) // Goes and fetches new user data
+                    break
     
                 // TODO ADD MORE CASES FOR ERRORS
     

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Navbar, NavbarBrand } from 'reactstrap';
 import { withRouter } from 'react-router-dom'
-import { Redirect } from 'react-router-dom'
 
 const NavBarStyle = {
     paddingTop: '10px',

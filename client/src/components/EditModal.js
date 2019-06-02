@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Container, Row, Col, Form, FormGroup, Input } from 'reactstrap'
 import LoadingOverlay from 'react-loading-overlay'
 import { DotLoader } from 'react-spinners'

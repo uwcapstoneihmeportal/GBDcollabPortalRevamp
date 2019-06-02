@@ -26,9 +26,8 @@ const dropdownImage = require('../images/dropdown.png')
 
 class UserDropdown extends Component {
     render() {
-        const { firstName, lastName } = this.props
+        const { firstName } = this.props
         const welcomeUser = "Welcome, " + firstName 
-        const fullName = firstName + " " + lastName
 
         return (
             <UncontrolledDropdown style={{textAlign: 'right', marginTop: '40px'}}>
@@ -59,8 +58,7 @@ class UserDropdown extends Component {
 // Redux
 function mapStateToProps(state) {
     return {
-        firstName: state.auth.user.FirstName,
-        lastName: state.auth.user.LastName
+        firstName: state.auth.user.FirstName
     }
 }
 

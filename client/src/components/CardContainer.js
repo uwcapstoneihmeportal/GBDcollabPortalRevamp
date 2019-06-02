@@ -39,7 +39,7 @@ class CardContainer extends Component {
         const { title, data, onEditClicked } = this.props
 
         const numDataPoints = data.length
-        const slicePoint = numDataPoints % 2 == 0 ? numDataPoints / 2 : Math.floor(numDataPoints / 2 + 1)
+        const slicePoint = numDataPoints % 2 === 0 ? numDataPoints / 2 : Math.floor(numDataPoints / 2 + 1)
         const columnSize = slicePoint < 2 ? 6 : 12 /slicePoint
     
         const firstThreeTitleLetters = title.slice(0, 3)
