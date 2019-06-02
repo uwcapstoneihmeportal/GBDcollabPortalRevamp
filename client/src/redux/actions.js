@@ -164,6 +164,10 @@ function fetchContactData(authInfo) {
             }
         })
         .then(userData => {
+            // store auth token in local storage
+            localStorage.setItem(authToken, authInfo.access_token)
+
+            // successfully login user / close edit modal when changes complete
             dispatch(loginSuccess(userData, authInfo))
             dispatch(closeModal()) // closes edit modal view if edit occurs
         })
