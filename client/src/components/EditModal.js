@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Row, Col, Form, FormGroup, Input } from 'reactstrap'
+import { DotLoader } from 'react-spinners'
 
 // The gray background
 const BackdropStyle = {
@@ -50,6 +51,11 @@ const TitleStyle = {
 
 
 class EditModal extends Component {
+    updateUserInfo(event) {
+        event.preventDefault()
+        this.props.onSave(this.state)
+    }
+
     render() {
         // Render nothing if the "show" prop is false
         if(!this.props.show) {
@@ -61,7 +67,6 @@ class EditModal extends Component {
                 <div  style={ModalStyle}>
                     <Container>
                         <h1 style={{ textAlign: 'center', color: '#696969' }}>{this.props.title}</h1>
-                        <p style={{ textAlign: 'center', color: '#696969' }}>Provide a value only for the information you want to change</p>
                         {this.props.data.map(field => {
                             return (
                                 <Row style={{paddingTop: '1vh', paddingBottom: '1vh'}}>
@@ -71,7 +76,14 @@ class EditModal extends Component {
                                     <Col sm="9">
                                         <Form>
                                             <FormGroup>
-                                                <Input placeholder={field.value} />
+                                                <Input 
+                                                    defaultValue={field.value} 
+                                                    onChange={e => {
+                                                        var newState = {}
+                                                        newState[field.name] = e.target.value
+                                                        this.setState(newState)
+                                                    }}
+                                                />
                                             </FormGroup>
                                         </Form>
                                     </Col>
@@ -81,7 +93,10 @@ class EditModal extends Component {
 
                         <Row style={{ marginTop: '2vh'}}>
                             <Col sm="6" style={{margin: '0 auto'}}> 
-                                <button style={SaveButtonStyle}>
+                                <button 
+                                    onClick={this.updateUserInfo.bind(this)} 
+                                    style={SaveButtonStyle}
+                                >
                                     Save
                                 </button>
                             </Col>

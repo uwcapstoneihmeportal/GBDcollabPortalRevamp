@@ -1,7 +1,8 @@
 // actions.js
 import { 
     LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, 
-    LOGOUT_SUCCESS, LOGOUT_FAILURE, OPEN_EDIT_MODAL, CLOSE_EDIT_MODAL
+    LOGOUT_SUCCESS, LOGOUT_FAILURE, OPEN_EDIT_MODAL, CLOSE_EDIT_MODAL, 
+    UPDATE_PROFILE_REQUEST, UPDATE_PROFILE_SUCCESS
 } from './actionTypes' 
 
 function loginRequest(email, password) {
@@ -15,13 +16,14 @@ function loginRequest(email, password) {
     }
 }
 
-function loginSuccess(user) {
+function loginSuccess(user, metaData) {
     return {
         type: LOGIN_SUCCESS,
         data: {
             isFetching: false,
             isAuthenticated: true,
-            user
+            user,
+            metaData
         }
     }
 }
@@ -44,6 +46,13 @@ function logoutSuccess() {
             isFetching: false,
             isAuthenticated: false,
         }
+    }
+}
+
+function updataProfileRequest() {
+    return {
+        type: UPDATE_PROFILE_REQUEST,
+        isFetching: true
     }
 }
 
@@ -155,7 +164,45 @@ function fetchContactData(authInfo) {
             }
         })
         .then(userData => {
-            dispatch(loginSuccess(userData))
+            dispatch(loginSuccess(userData, authInfo))
+            dispatch(closeModal()) // closes edit modal view if edit occurs
+        })
+        .catch(error => {
+            dispatch(loginFailure(error.message))
+        })
+    }
+}
+
+export function updateContactData(metaData, fields) {
+    let baseURL = "https://ihme--ischool2.cs79.my.salesforce.com"
+    let userURL = baseURL + metaData.sobject_url
+
+    let authToken = metaData.token_type + " " + metaData.access_token
+
+    let config = {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': authToken
+        },
+        body: JSON.stringify(fields) // make fields a js object (key to map)
+    }
+
+    return dispatch => {
+        dispatch(updataProfileRequest())
+
+        fetch(userURL, config)
+        .then(response => {
+            switch(response.status) {
+                case 204: // success (no content returned)
+                    // go update fetch user data
+                    dispatch(fetchContactData(metaData)) // Goes and fetches new user data
+    
+                // TODO ADD MORE CASES FOR ERRORS
+    
+                default:
+                    throw Error("Error updating your information, try again soon!")
+            }
         })
         .catch(error => {
             dispatch(loginFailure(error.message))

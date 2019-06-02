@@ -35,12 +35,12 @@ function mapStateToProps(state) {
                     {
                         title: 'authorship form sent',
                         value: state.auth.user.GBD_2017_Capstone_Authorship_Form__c.split(";"),
-                        field: 'GBD_2017_Capstone_Authorship_Form__c'
+                        name: 'GBD_2017_Capstone_Authorship_Form__c'
                     },
                     {
                         title: 'authored on',
                         value: state.auth.user.GBD_2017_Capstone_Authorship__c.split(";"),
-                        field: 'GBD_2017_Capstone_Authorship__c'
+                        name: 'GBD_2017_Capstone_Authorship__c'
                     },
                 ]
             }

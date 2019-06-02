@@ -32,7 +32,6 @@ const CardContainerStyle = {
 class CardContainer extends Component {
     handleEditPressed() {
         const { title, data } = this.props
-        console.log("Handle Edit Pressed on Card Container")
         this.props.onEditClicked(title, data)
     }
 
