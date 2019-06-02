@@ -77,7 +77,7 @@ class EditModal extends Component {
                                         <Form>
                                             <FormGroup>
                                                 <Input 
-                                                    defaultValue={field.value} 
+                                                    defaultValue={field.value.split(" \u2022 ").join(";")} 
                                                     onChange={e => {
                                                         var newState = {}
                                                         newState[field.name] = e.target.value

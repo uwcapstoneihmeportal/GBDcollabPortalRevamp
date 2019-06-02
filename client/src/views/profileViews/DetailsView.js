@@ -24,6 +24,7 @@ class DetailsView extends Component {
 
     render() {
         const { isFetching, isEditModalOpen, cards, modalTitle, modalData } = this.props
+        console.log(modalData)
 
         return (
             <div>
