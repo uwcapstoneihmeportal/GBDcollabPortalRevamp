@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Row, Col, Form, FormGroup, Input } from 'reactstrap'
+import LoadingOverlay from 'react-loading-overlay'
 import { DotLoader } from 'react-spinners'
 
 // The gray background
@@ -64,50 +65,61 @@ class EditModal extends Component {
 
         return (
             <div style={BackdropStyle}>
-                <div  style={ModalStyle}>
-                    <Container>
-                        <h1 style={{ textAlign: 'center', color: '#696969' }}>{this.props.title}</h1>
-                        {this.props.data.map(field => {
-                            return (
-                                <Row style={{paddingTop: '1vh', paddingBottom: '1vh'}}>
-                                    <Col sm="3">
-                                        <p style={TitleStyle}>{field.title}</p>
-                                    </Col>
-                                    <Col sm="9">
-                                        <Form>
-                                            <FormGroup>
-                                                <Input 
-                                                    defaultValue={field.value.split(" \u2022 ").join(";")} 
-                                                    onChange={e => {
-                                                        var newState = {}
-                                                        newState[field.name] = e.target.value
-                                                        this.setState(newState)
-                                                    }}
-                                                />
-                                            </FormGroup>
-                                        </Form>
-                                    </Col>
-                                </Row>
-                            )
-                        })}
+                <LoadingOverlay
+                    active={this.props.loading}
+                    spinner={<DotLoader color="#26a146" />}
+                    styles={{
+                        overlay: (base) => ({
+                            ...base,
+                            backgroundColor: 'transparent'
+                        })
+                    }}
+                >
+                    <div  style={ModalStyle}>
+                        <Container>
+                            <h1 style={{ textAlign: 'center', color: '#696969' }}>{this.props.title}</h1>
+                            {this.props.data.map(field => {
+                                return (
+                                    <Row style={{paddingTop: '1vh', paddingBottom: '1vh'}}>
+                                        <Col sm="3">
+                                            <p style={TitleStyle}>{field.title}</p>
+                                        </Col>
+                                        <Col sm="9">
+                                            <Form>
+                                                <FormGroup>
+                                                    <Input 
+                                                        defaultValue={field.value.split(" \u2022 ").join(";")} 
+                                                        onChange={e => {
+                                                            var newState = {}
+                                                            newState[field.name] = e.target.value
+                                                            this.setState(newState)
+                                                        }}
+                                                    />
+                                                </FormGroup>
+                                            </Form>
+                                        </Col>
+                                    </Row>
+                                )
+                            })}
 
-                        <Row style={{ marginTop: '2vh'}}>
-                            <Col sm="6" style={{margin: '0 auto'}}> 
-                                <button 
-                                    onClick={this.updateUserInfo.bind(this)} 
-                                    style={SaveButtonStyle}
-                                >
-                                    Save
-                                </button>
-                            </Col>
-                            <Col sm="6" style={{margin: '0 auto'}}> 
-                                <button onClick={this.props.onClose} style={CancelButtonStyle}>
-                                    Cancel
-                                </button>
-                            </Col>
-                        </Row>
-                    </Container>
-                </div>
+                            <Row style={{ marginTop: '2vh'}}>
+                                <Col sm="6" style={{margin: '0 auto'}}> 
+                                    <button 
+                                        onClick={this.updateUserInfo.bind(this)} 
+                                        style={SaveButtonStyle}
+                                    >
+                                        Save
+                                    </button>
+                                </Col>
+                                <Col sm="6" style={{margin: '0 auto'}}> 
+                                    <button onClick={this.props.onClose} style={CancelButtonStyle}>
+                                        Cancel
+                                    </button>
+                                </Col>
+                            </Row>
+                        </Container>
+                    </div>
+                </LoadingOverlay>
             </div>
         )
     }

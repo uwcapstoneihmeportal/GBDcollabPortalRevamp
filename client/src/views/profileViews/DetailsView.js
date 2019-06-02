@@ -18,13 +18,13 @@ class DetailsView extends Component {
     }
 
     updateInfo(state) {
-        const metaData = this.props.metaData        
+        const metaData = this.props.metaData
         this.props.dispatch(updateContactData(metaData, state))
     }
 
     render() {
         const { isFetching, isEditModalOpen, cards, modalTitle, modalData } = this.props
-        console.log(modalData)
+        console.log(isFetching)
 
         return (
             <div>
@@ -35,8 +35,9 @@ class DetailsView extends Component {
                     onSave={this.updateInfo.bind(this)}
                     title={modalTitle}
                     data={modalData}
+                    loading={isFetching}
                 />
-                
+
                 <Container>
                     {cards.map(card => {
                         return (

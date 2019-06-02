@@ -52,7 +52,9 @@ function logoutSuccess() {
 function updataProfileRequest() {
     return {
         type: UPDATE_PROFILE_REQUEST,
-        isFetching: true
+        data: {
+            isFetching: true
+        }
     }
 }
 
