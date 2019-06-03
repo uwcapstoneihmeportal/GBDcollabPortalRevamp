@@ -3,13 +3,8 @@
 This is a repo that will include frontend and backend code for the collaborator portal
 
 # Client Side
+
 **Using HTTPS with nginx + docker**
-
-
-
-
-# Server Side
-
 **Make sure to change the server name in deafult.conf file.**
 The NGINX Docker container keeps its default configuration file at `/etc/nginx/conf.d/default.conf`. You can get a copy of this file by executing these commands on your development machine:
 ```
@@ -44,6 +39,9 @@ After you modify the `default.conf` add this line to your `Dockerfile` to replac
 ```
 ADD default.conf /etc/nginx/conf.d/default.conf
 ```
+# Server Side
+
+
 ##Backend Server
 To continue working on this branch, please go to the branch by using this command: git checkout backend_development.
 This whole package is written in GoLang so please set up the Go environment before cloning this repo.
