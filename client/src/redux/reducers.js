@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, 
     LOGOUT_SUCCESS, OPEN_EDIT_MODAL, CLOSE_EDIT_MODAL,
-    UPDATE_PROFILE_REQUEST
+    UPDATE_PROFILE_REQUEST, UPDATE_PROFILE_FAILURE
 } from './actionTypes'
 
 const authIntitialState = {
@@ -19,6 +19,7 @@ function authReducer(state = authIntitialState, action) {
         case OPEN_EDIT_MODAL:
         case CLOSE_EDIT_MODAL:
         case UPDATE_PROFILE_REQUEST:
+        case UPDATE_PROFILE_FAILURE:
             return Object.assign({}, state,
                 action.data
             )
@@ -26,18 +27,6 @@ function authReducer(state = authIntitialState, action) {
             return state
     }
 }
-
-// function editReducer(state = editInitalState, action) {
-//     switch (action) {
-//         case OPEN_EDIT_MODAL:
-//         case CLOSE_EDIT_MODAL:
-//             return Object.assign({}, state,
-//                 action.data
-//             )
-//         default: 
-//             return state
-//     }
-// }
 
 const rootReducer = combineReducers({auth: authReducer})
 

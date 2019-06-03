@@ -2,9 +2,10 @@
 import { 
     LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, 
     OPEN_EDIT_MODAL, CLOSE_EDIT_MODAL, 
-    UPDATE_PROFILE_REQUEST
+    UPDATE_PROFILE_REQUEST, UPDATE_PROFILE_FAILURE
 } from './actionTypes' 
 
+//////// LOGIN ACTIONS ///////////
 function loginRequest(email, password) {
     return {
         type: LOGIN_REQUEST,
@@ -39,6 +40,13 @@ function loginFailure(errorMessage) {
     }
 }
 
+///////// LOGOUT ACTIONS /////////
+export function logoutUser() {
+    return dispatch => {
+        dispatch(logoutSuccess())
+    }
+}
+
 function logoutSuccess() {
     return {
         type: LOGIN_SUCCESS,
@@ -49,12 +57,31 @@ function logoutSuccess() {
     }
 }
 
+//////// UPDATE PROFILE ACTIONS ///////////
 function updataProfileRequest() {
     return {
         type: UPDATE_PROFILE_REQUEST,
         data: {
             isFetching: true
         }
+    }
+}
+
+function updateInfoFailure(errorMessage) {
+    return {
+        type: UPDATE_PROFILE_FAILURE,
+        data: {
+            isFetching: false,
+            error: errorMessage
+        }
+    }
+}
+
+
+///////// EDIT MODAL ACTIONS //////////
+export function openModal(title, data) {
+    return dispatch => {
+        dispatch(openEditModal(title, data))
     }
 }
 
@@ -69,6 +96,12 @@ function openEditModal(title, data) {
     }
 }
 
+export function closeModal() {
+    return dispatch => {
+        dispatch(closeEditModal())
+    }
+}
+
 function closeEditModal() {
     return {
         type: CLOSE_EDIT_MODAL,
@@ -78,25 +111,8 @@ function closeEditModal() {
     }
 }
 
-export function closeModal() {
-    return dispatch => {
-        dispatch(closeEditModal())
-    }
-}
 
-export function openModal(title, data) {
-    return dispatch => {
-        dispatch(openEditModal(title, data))
-    }
-}
-
-export function logoutUser() {
-    return dispatch => {
-        dispatch(logoutSuccess())
-    }
-}
-
-
+////////// API ACTION CALLS ///////// 
 export function loginUser(email, password) {
     let config = {
         method: 'POST',
@@ -199,6 +215,8 @@ export function updateContactData(metaData, fields) {
 
         fetch(userURL, config)
         .then(response => {
+            console.log(response.status)
+
             switch(response.status) {
                 case 204: // success (no content returned)
                     // go update fetch user data
@@ -212,7 +230,7 @@ export function updateContactData(metaData, fields) {
             }
         })
         .catch(error => {
-            dispatch(loginFailure(error.message))
+            dispatch(updateInfoFailure(error.message))
         })
     }
 }
