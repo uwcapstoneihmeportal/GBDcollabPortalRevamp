@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Navbar, NavbarBrand, Nav, Collapse, FormGroup } from 'reactstrap'
+import { Container, Row, Col, Navbar, NavbarBrand, Nav, FormGroup } from 'reactstrap'
 import NavigationItem from '../components/NavigationItem'
 import CustomInput from './CustomInput'
 import UserDropdown from './UserDropdown'
 
+// Style
 const NavBarContainerStyle = {
     background: 'linear-gradient(#cbe2a0, #26a146)',
     padding: '0',
@@ -18,8 +19,10 @@ const LogoStyle = {
     height: '10vh'
 }
 
+// Image
 const brandImage = require('../images/ihme_logo.png')
 
+// Component
 class NavigationBar extends Component {
     render() {
         return (
@@ -45,16 +48,14 @@ class NavigationBar extends Component {
                 <Row>
                     <Col>
                         <Navbar style={{marginTop: '4vh'}} expand="md">
-                            <Collapse isOpen={false} navbar>
-                                <Nav className="nav-fill w-100" navbar>
-                                    <NavigationItem label="Home" />
-                                    <NavigationItem label="Research" />
-                                    <NavigationItem label="News &amp; Events" />
-                                    <NavigationItem label="Projects" />
-                                    <NavigationItem label="Get Involved" />
-                                    <NavigationItem label="About" />
-                                </Nav>
-                            </Collapse>
+                            <Nav className="nav-fill w-100" navbar>
+                                <NavigationItem label="Home" ref="/home"/>
+                                <NavigationItem label="Research" ref="/home"/>
+                                <NavigationItem label="News &amp; Events" ref="/home"/>
+                                <NavigationItem label="Projects" ref="/home"/>
+                                <NavigationItem label="Get Involved" ref="/home"/>
+                                <NavigationItem label="About" ref="/home"/>
+                            </Nav>
                         </Navbar>
                     </Col>
                 </Row>

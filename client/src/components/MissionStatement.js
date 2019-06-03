@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+// Style
 const StatementStyle = {
     background: 'rgba(38, 161, 70, 0.8)',
     color: 'white',
@@ -9,6 +10,7 @@ const StatementStyle = {
     position: 'relative'
 }
 
+// Component
 class MissionStatement extends Component {
     render() {
         return (

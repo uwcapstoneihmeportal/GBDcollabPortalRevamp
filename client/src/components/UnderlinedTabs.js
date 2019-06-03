@@ -6,6 +6,8 @@ import '../styles/profile.css'
 class UnderlinedTabs extends Component {
     render() {
         const tabs = this.props.tabs
+
+        // Tabs that are underlined when selected, display given content
         return (
             <Tabs
                 defaultTab={this.props.default}

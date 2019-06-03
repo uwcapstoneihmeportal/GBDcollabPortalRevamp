@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
-
 import { logoutUser } from '../redux/actions'
 
+// Styling
 const DropdownToggleStyle = {
     backgroundColor: 'transparent',
     border: 'none',
@@ -23,6 +23,7 @@ const DropdownImageStyle = {
     marginLeft: '10px'
 }
 
+// Images
 const userImage = require('../images/user.png')
 const dropdownImage = require('../images/dropdown.png')
 

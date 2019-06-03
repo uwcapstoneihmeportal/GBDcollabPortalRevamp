@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 import { Container, Row, Col, Form, FormGroup, Input } from 'reactstrap'
 import LoadingOverlay from 'react-loading-overlay'
 import { DotLoader } from 'react-spinners'
 
-// The gray background
-const BackdropStyle = {
+// Styling
+
+const BackdropStyle = { // The gray background
     position: 'fixed',
     top: 0,
     bottom: 0,
@@ -15,8 +17,8 @@ const BackdropStyle = {
     zIndex: 10
 }
 
-// The modal "window"
-const ModalStyle = {
+
+const ModalStyle = { // The modal "window"
     backgroundColor: '#fff',
     borderRadius: 5,
     maxWidth: 600,
@@ -49,8 +51,10 @@ const TitleStyle = {
     color: '#c1c1c1'
 }
 
-
+// Component
 class EditModal extends Component {
+
+    // Calls prop callback to handle when Save button is pressed
     updateUserInfo(event) {
         event.preventDefault()
         this.props.onSave(this.state)
@@ -123,5 +127,16 @@ class EditModal extends Component {
         )
     }
 }
+
+// PropTypes
+EditModal.propTypes = {
+    show: PropTypes.bool.isRequired, // whether the modal should be displayed
+    onClose: PropTypes.func.isRequired, // What to do when modal is closed
+    onSave: PropTypes.func, // What to do when Save is pressed
+    title: PropTypes.string, // Title of the modal
+    data: PropTypes.arrayOf(PropTypes.object), // title and value objects
+    loading: PropTypes.bool, // Whether to show spinner after button click
+}
+
 
 export default EditModal;

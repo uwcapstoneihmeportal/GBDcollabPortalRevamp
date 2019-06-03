@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import ProfileNavbar from './ProfileNavBar'
 
-const jobIcon = require('../images/job.png')
-const locationIcon = require('../images/location.png')
-
+// Styling
 const BannerStyle = {
     background: 'linear-gradient(#cbe2a0, #26a146)',
     color: 'white',
@@ -22,6 +21,12 @@ const LabelStyle = {
     marginRight: '4vh'
 }
 
+// Images
+const jobIcon = require('../images/job.png')
+const locationIcon = require('../images/location.png')
+
+
+// Components
 class ProfileBanner extends Component {
     render() {
 
@@ -54,6 +59,13 @@ function mapStateToProps(state) {
         position: state.auth.user.Position__c,
         location: state.auth.user.MailingCountry + ", " + state.auth.user.MailingState
     }
+}
+
+// PropTypes
+ProfileBanner.propTypes = {
+    firstName: PropTypes.string.isRequired,
+    position: PropTypes.string.isRequired,
+    location: PropTypes.string.isRequired
 }
 
 export default connect(mapStateToProps)(ProfileBanner)

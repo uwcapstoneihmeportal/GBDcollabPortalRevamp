@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
-const logo = require('../images/logo.png')
-
+// Styling
 const BannerStyle = {
     background: 'linear-gradient(#cbe2a0, #67b56b, #26a146)',
     backgroundRepeat: 'no-repeat',
@@ -36,6 +35,10 @@ const SloganTextStyle = {
     position: 'absolute'
 }
 
+// Images
+const logo = require('../images/logo.png')
+
+// Component
 class SignInBanner extends Component {
     render() {
         return (

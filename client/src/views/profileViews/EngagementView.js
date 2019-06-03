@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Container, Row, Col } from 'react-bootstrap'
-import CardContainer from '../../components/CardContainer'
+import ProfileCard from '../../components/ProfileCard'
 
 import EditModal from '../../components/EditModal'
 import { openModal, closeModal, updateContactData } from '../../redux/actions'
@@ -43,7 +43,7 @@ class EngagementViews extends Component {
                         return (
                             <Row style={{ marginBottom: '6vh' }}>
                                 <Col xs="12">
-                                    <CardContainer
+                                    <ProfileCard
                                         title={card.title}
                                         data={card.data}
                                         onEditClicked={this.displayEditModal.bind(this)}

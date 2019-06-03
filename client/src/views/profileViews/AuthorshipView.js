@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Container, Row, Col } from 'react-bootstrap'
-import CardContainer from '../../components/CardContainer'
+import ProfileCard from '../../components/ProfileCard'
 
 class AuthorshipView extends Component {
     render() {
@@ -13,7 +13,7 @@ class AuthorshipView extends Component {
                     return (
                         <Row style={{ marginBottom: '6vh' }}>
                             <Col xs="12">
-                                <CardContainer
+                                <ProfileCard
                                     title={card.title}
                                     data={card.data}
                                 />

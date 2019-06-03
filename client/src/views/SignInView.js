@@ -81,13 +81,11 @@ class SignInView extends Component {
                                 </h1>
                                 <Form>
                                     <CustomInput
-                                        ref="email"
                                         labelText="Email"
                                         onChangeCallback={e => this.setState({ email: e.target.value })}
                                         imagePath={require("../images/green_user.png")}
                                     />
                                     <CustomInput
-                                        ref="password"
                                         labelText="Password"
                                         type="password"
                                         onChangeCallback={e => this.setState({ password: e.target.value })}

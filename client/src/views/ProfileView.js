@@ -13,24 +13,24 @@ const TabContainerStyle = {
 }
 
 const tabs = [
-    {title: "Profile", content: <ProfileContentView />},
-    {title: "Related", content: <div></div>}
-]   
+    { title: "Profile", content: <ProfileContentView /> },
+    { title: "Related", content: <div></div> }
+]
 
 class ProfileView extends Component {
     render() {
 
         const { isAuthenticated } = this.props
-        
+
         // If user is not authenticated, then redirect to sign in
         if (!isAuthenticated) {
-            return (<Redirect to='/' /> )
+            return (<Redirect to='/' />)
         }
 
         return (
             < div >
                 <ProfileBanner />
-                <UnderlinedTabs 
+                <UnderlinedTabs
                     default="Profile"
                     tabs={tabs}
                     style={TabContainerStyle}
