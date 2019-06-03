@@ -12,8 +12,6 @@ import (
 func main() {
 	/* TODO: add code to do the following
 	- Create a new mux for the web server.
-	- Tell the mux to call your handlers.SummaryHandler function
-	  when the "/v1/summary" URL path is requested.
 	- Start a web server listening on the address you read from
 	  the environment variable, using the mux you created as
 	  the root handler. Use log.Fatal() to report any errors
