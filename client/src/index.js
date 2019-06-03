@@ -7,10 +7,23 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-import rootReducer from './reducers'
+import { createStore, applyMiddleware } from 'redux'
+import thunkMiddleware from 'redux-thunk'
+import rootReducer from './redux/reducers'
 
-const store = createStore(rootReducer)
+import { loginSuccess }  from './redux/actions'
+
+let createStoreWithMiddleware = applyMiddleware(thunkMiddleware)(createStore)
+const store = createStoreWithMiddleware(rootReducer)
+
+// Take user to home page if they are already logged in
+const token = localStorage.getItem('authToken')
+if (token) {
+    const user = JSON.parse(localStorage.getItem('user'))
+    const metaData = JSON.parse(localStorage.getItem('metaData'))
+    store.dispatch(loginSuccess(user, metaData))
+}
+
 
 ReactDOM.render(
 <Provider store={store} >

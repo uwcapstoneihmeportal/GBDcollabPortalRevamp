@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 import { FormGroup, Button } from 'reactstrap';
 
+// Styling
 const ButtonStyle = {
     backgroundColor: '#26a146',
     borderRadius: '25px',
@@ -9,7 +11,8 @@ const ButtonStyle = {
     width: '85%'
 }
 
-export default class AuthButton extends Component {
+// Component
+class AuthButton extends Component {
     render() {
         return (
             <FormGroup>
@@ -20,3 +23,10 @@ export default class AuthButton extends Component {
         )
     }
 }
+
+// PropTypes
+AuthButton.propTypes = {
+    onClick: PropTypes.func.isRequired
+}
+
+export default AuthButton

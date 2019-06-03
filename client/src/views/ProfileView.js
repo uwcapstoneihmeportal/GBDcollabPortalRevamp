@@ -1,88 +1,49 @@
-import React, { Component } from 'react';
-import { Button, TabContent, TabPane, Nav, NavItem, NavLink, Container, Row, Col } from 'reactstrap'
-import classnames from 'classnames';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Redirect, withRouter } from 'react-router-dom'
 
+import ProfileContentView from './ProfileContentView'
 import ProfileBanner from '../components/ProfileBanner'
+import UnderlinedTabs from '../components/UnderlinedTabs'
 
-const EditProfileButtonStyle = {
-    borderRadius: '25px', 
-    border: '1px solid #26a146', 
-    backgroundColor: '#26a146', 
-    color: 'white',
-    marginBottom: '10px', 
+const TabContainerStyle = {
+    paddingLeft: '12vh',
+    paddingTop: '4vh',
+    fontSize: '15pt'
 }
+
+const tabs = [
+    { title: "Profile", content: <ProfileContentView /> },
+    { title: "Related", content: <div></div> }
+]
 
 class ProfileView extends Component {
-    constructor(props) {
-        super(props);
-
-        this.toggle = this.toggle.bind(this);
-        this.state = {
-            activeTab: '1'
-        };
-    }
-
-    toggle(tab) {
-        if (this.state.activeTab !== tab) {
-            this.setState({
-                activeTab: tab
-            });
-        }
-    }
-
     render() {
+
+        const { isAuthenticated } = this.props
+
+        // If user is not authenticated, then redirect to sign in
+        if (!isAuthenticated) {
+            return (<Redirect to='/' />)
+        }
+
         return (
-            <div>
+            < div >
                 <ProfileBanner />
-
-                {/* <Nav tabs>
-                    <NavItem>
-
-                    </NavItem>
-                    <NavItem>
-
-                    </NavItem>
-                </Nav> */}
-
-
-                <Nav tabs style={{ paddingLeft: '60px', alignItems: 'center' }}>
-                    <NavItem>
-                        <NavLink
-                            className={classnames({ active: this.state.activeTab === '1' })}
-                            onClick={() => { this.toggle('1'); }}
-                        >
-                            Personal Profile
-                    </NavLink>
-                    </NavItem>
-                    <NavItem style={{marginRight: '600px'}}>
-                        <NavLink
-                            className={classnames({ active: this.state.activeTab === '2' })}
-                            onClick={() => { this.toggle('2'); }}
-                        >
-                            Publications
-                    </NavLink>
-                    </NavItem>
-
-                    <Button style={EditProfileButtonStyle} variant="link">
-                        Edit Profile
-                    </Button>
-                </Nav>
-                <TabContent activeTab={this.state.activeTab} style={{ paddingLeft: '60px', paddingRight: '60px', backgroundColor: '#F6F6F6' }}>
-                    <TabPane tabId="1" >
-                        <Row>
-                            <Col sm="12">
-                                
-                            </Col>
-                        </Row>
-                    </TabPane>
-                    <TabPane tabId="2">
-                        
-
-                    </TabPane>
-                </TabContent>
-            </div>
-        );
+                <UnderlinedTabs
+                    default="Profile"
+                    tabs={tabs}
+                    style={TabContainerStyle}
+                />
+            </div >
+        )
     }
 }
 
-export default ProfileView
+// Redux
+function mapStateToProps(state) {
+    return {
+        isAuthenticated: state.auth.isAuthenticated,
+    }
+}
+export default withRouter(connect(mapStateToProps)(ProfileView))

@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 
+// Style
 const StatementStyle = {
-    backgroundColor: "#cbe2a0",
+    background: 'rgba(38, 161, 70, 0.8)',
+    color: 'white',
     padding: "30px 50px 30px 50px",
-    width: '60%'
+    marginTop: '-70px',
+    width: '60%',
+    position: 'relative'
 }
 
+// Component
 class MissionStatement extends Component {
     render() {
         return (

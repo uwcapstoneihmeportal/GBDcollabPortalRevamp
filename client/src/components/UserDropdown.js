@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
+import { logoutUser } from '../redux/actions'
 
+// Styling
 const DropdownToggleStyle = {
-    backgroundColor: '#cbe2a0',
+    backgroundColor: 'transparent',
     border: 'none',
-    color: 'black',
+    color: 'white',
     marginRight: '10px',
     textAlign: 'right'
 }
@@ -20,28 +23,47 @@ const DropdownImageStyle = {
     marginLeft: '10px'
 }
 
+// Images
 const userImage = require('../images/user.png')
 const dropdownImage = require('../images/dropdown.png')
 
 class UserDropdown extends Component {
+
+    logoutUser(event) {
+        event.preventDefault()
+
+        localStorage.removeItem('authToken')
+        localStorage.removeItem('user')
+        localStorage.removeItem('metaData')
+
+        this.props.dispatch(logoutUser())
+        this.props.history.push('/')
+    }
+
+
     render() {
+        const { firstName } = this.props
+        const welcomeUser = "Welcome, " + firstName 
+
         return (
-            <UncontrolledDropdown style={{textAlign: 'right'}}>
+            <UncontrolledDropdown style={{textAlign: 'right', marginTop: '40px'}}>
                 <DropdownToggle style={DropdownToggleStyle}>
-                    <img src={userImage} alt="image of user" style={{...BaseImageStyle}}/>
-                    Welcome, Sam
-                    <img src={dropdownImage} alt="image of user" style={{...BaseImageStyle, ...DropdownImageStyle}}/>
+                    <img src={userImage} alt="user" style={{...BaseImageStyle}}/>
+                    {welcomeUser}
+                    <img src={dropdownImage} alt="user" style={{...BaseImageStyle, ...DropdownImageStyle}}/>
                 </DropdownToggle>
                 <DropdownMenu>
-                    <DropdownItem header style={{fontSize: '20px', color: '#2F4F4F', textAlign: 'right'}}>
-                        Sam Johnson
-                    </DropdownItem>
-                    <DropdownItem>
-                        View Profile
+                    <DropdownItem 
+                        onClick={e => {this.props.history.push('/profile')}}
+                    >
+                    View Profile
                     </DropdownItem>
                     <DropdownItem divider />
-                    <DropdownItem style={{ color: 'red' }}>
-                        Logout
+                    <DropdownItem 
+                        onClick={this.logoutUser.bind(this)}
+                        style={{ color: 'red' }}
+                    >
+                    Logout
                     </DropdownItem>
                 </DropdownMenu>
             </UncontrolledDropdown>
@@ -49,4 +71,11 @@ class UserDropdown extends Component {
     }
 }
 
-export default UserDropdown
+// Redux
+function mapStateToProps(state) {
+    return {
+        firstName: state.auth.user.FirstName
+    }
+}
+
+export default connect(mapStateToProps)(withRouter(UserDropdown))

@@ -1,31 +1,50 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import ProfileNavbar from './ProfileNavBar'
 
-const jobIcon = require('../images/job.png')
-const locationIcon = require('../images/location.png')
-
+// Styling
 const BannerStyle = {
     background: 'linear-gradient(#cbe2a0, #26a146)',
-    marginBottom: '15px',
-    paddingTop: '12vh',
-    paddingBottom: '12vh',
+    color: 'white',
+    paddingBottom: '10vh',
     textAlign: 'center'
 }
 
+const ImageStyle = {
+    height: '25px'
+}
+
+const LabelStyle = {
+    fontSize: '20px',
+    marginLeft: '2vh',
+    marginRight: '4vh'
+}
+
+// Images
+const jobIcon = require('../images/job.png')
+const locationIcon = require('../images/location.png')
+
+
+// Components
 class ProfileBanner extends Component {
     render() {
+
+        const { firstName, position, location } = this.props
+        const greeting = "Hello, " + firstName + "!"
+
         return (
             <div style={BannerStyle}>
-                <h1>Sam Johnson</h1>
-                <div style={{ display: 'inline-block', marginRight: '10px' }}>
-                    <img src={jobIcon} alt="job image icon" style={{ height: '30px', marginBottom: '5px'}} />
-                    <span style={{ marginLeft: '5px', fontSize: '20px' }}>
-                        Health Specialist
+                <ProfileNavbar />
+                <h1>{greeting}</h1>
+                <div>
+                    <img src={jobIcon} alt="job icon" style={ImageStyle} />
+                    <span style={LabelStyle}>
+                        {position}
                     </span>
-                </div>
-                <div style={{ display: 'inline-block', marginLeft: '10px' }}>
-                    <img src={locationIcon} alt="location image icon" style={{ height: '40px'}} />
-                    <span style={{ marginLeft: '-5px', fontSize: '20px' }}>
-                        United States, WA
+                    <img src={locationIcon} alt="location icon" style={ImageStyle} />
+                    <span style={LabelStyle}>
+                        {location}
                     </span>
                 </div>
             </div>
@@ -33,4 +52,20 @@ class ProfileBanner extends Component {
     }
 }
 
-export default ProfileBanner
+// Redux
+function mapStateToProps(state) {
+    return {
+        firstName: state.auth.user.FirstName,
+        position: state.auth.user.Position__c,
+        location: state.auth.user.MailingCountry + ", " + state.auth.user.MailingState
+    }
+}
+
+// PropTypes
+ProfileBanner.propTypes = {
+    firstName: PropTypes.string.isRequired,
+    position: PropTypes.string.isRequired,
+    location: PropTypes.string.isRequired
+}
+
+export default connect(mapStateToProps)(ProfileBanner)
