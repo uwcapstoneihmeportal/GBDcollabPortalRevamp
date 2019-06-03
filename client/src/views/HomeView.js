@@ -12,8 +12,7 @@ const bannerImage = require("../images/homeBanner.png")
 class HomeView extends Component {
     componentDidMount() {  
         this.initViz()  
-    }  
-
+    }   
     initViz() {  
         const vizUrl = 'https://public.tableau.com/shared/MDSMNZPM2?:toolbar=no&:display_count=yes&:origin=viz_share_link';  
         const vizContainer = this.vizContainer;  
