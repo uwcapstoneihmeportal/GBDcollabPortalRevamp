@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { NavItem, NavLink, } from 'reactstrap' 
 
 // Styling
-import '../styles/navbar.css' // Some styling done in CSS file to handle onHover events, etc
+import '../styles/navbar.css'
 
 const NavLinkStyle = {
     fontSize: '14pt'
@@ -14,7 +14,7 @@ class NavigationItem extends Component {
     render() {
         return (
             <NavItem>
-                <NavLink style={NavLinkStyle} href={this.props.ref}>             
+                <NavLink style={NavLinkStyle} href={this.props.route}>             
                     {this.props.label}
                 </NavLink>
             </NavItem>
@@ -25,7 +25,7 @@ class NavigationItem extends Component {
 // PropType
 NavigationItem.propTypes = {
     label: PropTypes.string,
-    ref: PropTypes.string // route to new subdomain (i.e. /home)
+    route: PropTypes.string // route to new subdomain (i.e. /home)
 }
 
 export default NavigationItem

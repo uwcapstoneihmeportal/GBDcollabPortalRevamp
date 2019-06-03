@@ -49,12 +49,12 @@ class NavigationBar extends Component {
                     <Col>
                         <Navbar style={{marginTop: '4vh'}} expand="md">
                             <Nav className="nav-fill w-100" navbar>
-                                <NavigationItem label="Home" ref="/home"/>
-                                <NavigationItem label="Research" ref="/home"/>
-                                <NavigationItem label="News &amp; Events" ref="/home"/>
-                                <NavigationItem label="Projects" ref="/home"/>
-                                <NavigationItem label="Get Involved" ref="/home"/>
-                                <NavigationItem label="About" ref="/home"/>
+                                <NavigationItem label="Home" route="/home" />
+                                <NavigationItem label="Research" route="/home" />
+                                <NavigationItem label="News &amp; Events" route="/home" />
+                                <NavigationItem label="Projects" route="/home" />
+                                <NavigationItem label="Get Involved" route="/home" />
+                                <NavigationItem label="About" route="/home" />
                             </Nav>
                         </Navbar>
                     </Col>
