@@ -62,7 +62,8 @@ function updataProfileRequest() {
     return {
         type: UPDATE_PROFILE_REQUEST,
         data: {
-            isFetching: true
+            isFetching: true,
+            error: ''
         }
     }
 }
@@ -215,7 +216,7 @@ export function updateContactData(metaData, fields) {
 
         fetch(userURL, config)
         .then(response => {
-            console.log(response.status)
+            console.log(response)
 
             switch(response.status) {
                 case 204: // success (no content returned)
@@ -223,7 +224,8 @@ export function updateContactData(metaData, fields) {
                     dispatch(fetchContactData(metaData)) // Goes and fetches new user data
                     break
     
-                // TODO ADD MORE CASES FOR ERRORS
+                case 400:
+                    throw Error("Sorry, we don't support updating one or more of these fields this time. Try each one individually. We are working on it, so check back soon!")
     
                 default:
                     throw Error("Error updating your information, try again soon!")

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Container, Row, Col, Form, FormGroup, Input } from 'reactstrap'
 import LoadingOverlay from 'react-loading-overlay'
 import { DotLoader } from 'react-spinners'
 
 // Styling
-
 const BackdropStyle = { // The gray background
     position: 'fixed',
     top: 0,
@@ -66,6 +66,8 @@ class EditModal extends Component {
           return null;
         }
 
+        const { error } = this.props
+
         return (
             <div style={BackdropStyle}>
                 <LoadingOverlay
@@ -120,11 +122,23 @@ class EditModal extends Component {
                                     </button>
                                 </Col>
                             </Row>
+                            <Row>
+                                <Col sm="12" style={{color: 'red', textAlign: 'center', marginTop: '2vh'}}>
+                                    {error}
+                                </Col>
+                            </Row>
                         </Container>
                     </div>
                 </LoadingOverlay>
             </div>
         )
+    }
+}
+
+// Redux
+function mapStateToProps(state) {
+    return {
+        error: state.auth.error
     }
 }
 
@@ -138,5 +152,4 @@ EditModal.propTypes = {
     loading: PropTypes.bool, // Whether to show spinner after button click
 }
 
-
-export default EditModal;
+export default connect(mapStateToProps)(EditModal)
