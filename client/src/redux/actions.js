@@ -16,7 +16,7 @@ function loginRequest(email, password) {
     }
 }
 
-function loginSuccess(user, metaData) {
+export function loginSuccess(user, metaData) {
     return {
         type: LOGIN_SUCCESS,
         data: {
@@ -91,8 +91,6 @@ export function openModal(title, data) {
 }
 
 export function logoutUser() {
-    // do something with cached key
-
     return dispatch => {
         dispatch(logoutSuccess())
     }
@@ -166,8 +164,10 @@ function fetchContactData(authInfo) {
             }
         })
         .then(userData => {
-            // store auth token in local storage
-            localStorage.setItem(authToken, authInfo.access_token)
+            // store data in local storage
+            localStorage.setItem('authToken', authToken)
+            localStorage.setItem('user', JSON.stringify(userData))
+            localStorage.setItem('metaData', JSON.stringify(authInfo))
 
             // successfully login user / close edit modal when changes complete
             dispatch(loginSuccess(userData, authInfo))

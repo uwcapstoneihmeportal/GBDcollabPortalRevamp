@@ -4,7 +4,7 @@ const StatementStyle = {
     background: 'rgba(38, 161, 70, 0.8)',
     color: 'white',
     padding: "30px 50px 30px 50px",
-    marginTop: '-75px',
+    marginTop: '-65px',
     width: '60%',
     position: 'relative'
 }

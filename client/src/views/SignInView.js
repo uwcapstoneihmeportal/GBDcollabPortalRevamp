@@ -36,6 +36,9 @@ class SignInView extends Component {
         this.handleSubmit = this.handleSubmit.bind(this)
 
         // logout user if they visit this page or come back to it
+        localStorage.removeItem('authToken')
+        localStorage.removeItem('user')
+        localStorage.removeItem('metaData')
         this.props.dispatch(logoutUser())
     }
 

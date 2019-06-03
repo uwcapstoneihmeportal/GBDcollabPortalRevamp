@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
 
+import { logoutUser } from '../redux/actions'
+
 const DropdownToggleStyle = {
     backgroundColor: 'transparent',
     border: 'none',
@@ -25,6 +27,19 @@ const userImage = require('../images/user.png')
 const dropdownImage = require('../images/dropdown.png')
 
 class UserDropdown extends Component {
+
+    logoutUser(event) {
+        event.preventDefault()
+
+        localStorage.removeItem('authToken')
+        localStorage.removeItem('user')
+        localStorage.removeItem('metaData')
+
+        this.props.dispatch(logoutUser())
+        this.props.history.push('/')
+    }
+
+
     render() {
         const { firstName } = this.props
         const welcomeUser = "Welcome, " + firstName 
@@ -44,7 +59,7 @@ class UserDropdown extends Component {
                     </DropdownItem>
                     <DropdownItem divider />
                     <DropdownItem 
-                        onClick={e => {this.props.history.push('/')}}
+                        onClick={this.logoutUser.bind(this)}
                         style={{ color: 'red' }}
                     >
                     Logout

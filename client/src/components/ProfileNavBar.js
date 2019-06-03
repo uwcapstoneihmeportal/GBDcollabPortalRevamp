@@ -19,7 +19,7 @@ class ProfileNavBar extends Component {
         return (
             <div>
                 <Navbar style={NavBarStyle} expand="md">
-                    <NavbarBrand>
+                    <NavbarBrand href="/home">
                         <img 
                             src={brandImage} 
                             alt="IHME logo" 
