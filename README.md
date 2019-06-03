@@ -41,12 +41,14 @@ ADD default.conf /etc/nginx/conf.d/default.conf
 ```
 # Server Side
 
-
 ##Backend Server
+
 To continue working on this branch, please go to the branch by using this command: git checkout backend_development.
 This whole package is written in GoLang so please set up the Go environment before cloning this repo.
 [Example](https://medium.com/@AkyunaAkish/setting-up-a-golang-development-environment-mac-os-x-d58e5a7ea24f)
+Make sure to include [this](https://github.com/nimajalali/go-force) package **Critical Third Party Dependency**
 ###Current status
+
 Currently, there are two endpoints available in auth.go, /v1/authorize and /v1/password_update.
 This is an example of a build script used for development.
 ```
