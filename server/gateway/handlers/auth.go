@@ -4,271 +4,144 @@ import (
 	"net/http"
 	"fmt"
 	"encoding/json"
-	"github.com/capstone/uwcapstoneihmeportal.github.io/server/gateway/models/users"
-	"github.com/capstone/uwcapstoneihmeportal.github.io/server/gateway/indexes"
-	"github.com/capstone/uwcapstoneihmeportal.github.io/server/gateway/sessions"
-	"time"
-	"path"
-	"strconv"
 	"golang.org/x/crypto/bcrypt"
 	"errors"
-	"strings"
-	"sort"
-	"github.com/nbutton23/zxcvbn-go"
+	"github.com/nimajalali/go-force/sobjects"
 )
+
+//successful response interface for user authorization
+type AuthToken struct {
+	Default_password bool `json:"default_password"`
+	Access_token string `json:"access_token"`
+	Token_type string `json:"token_type"`
+	Sojbect_url string `json:"sobject_url"`
+}
+
+//login input json interface from the client
+type Credentials struct {
+	Email string `json:"email"`
+	Password string `json:"password"`
+}
+
+//payload interface used to send patch request to Salesforce REST Api
+type NewPassword struct {
+	NewPassHash string	`json:"password__c"`
+}
+
+//password update input json interface from the client
+type PasswordRequest struct {
+	Access_token string `json:"access_token"`
+	New_password string `json:"new_password"`
+	Sobject_url string `json:"sobject_url"`
+}
+
+//specific record interface to decode json response from Salesforce query
+type Record struct {
+	sobjects.BaseSObject
+	Email string `force:"Email"`
+	Password string `force:"password__c"`
+}
+
+//interface to decode json response from Salesforce query
+type Records struct {
+	sobjects.BaseQuery
+	Records []Record `force:"records"`
+}
 
 var bcryptCost = 13
 
-//helper function that would store or remove users from trie structure.
-func storeOrRemoveFromTrie(user *users.User, trie *indexes.Trie, remove bool) {
-	names := []string{user.FirstName, user.LastName, user.UserName}
-	for _, name := range names {
-		for _, key := range strings.Split(name, " ") {
-			if remove {
-				trie.Remove(key, user.UserID)
-			} else {
-				trie.Add(key, user.UserID)
-			}
-		}
-	}
-}
-
-
-func (ctx *SessionContext)UsersHandler(w http.ResponseWriter, r *http.Request) {
+func (ctx *SessionContext)Authorize(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
-	case http.MethodGet:
-		_, err := sessions.GetSessionID(r, ctx.signInKey)
-		if err != nil {
-			http.Error(w, fmt.Sprintf("unauthorized user: %v", err), http.StatusUnauthorized)
-			return
-		}
-		var currentState SessionState
-		_, err = sessions.GetState(r, ctx.signInKey, ctx.sessionStore, &currentState)
-		if err != nil {
-			http.Error(w, fmt.Sprintf("error getting the current state of user: %v", err), http.StatusInternalServerError)
-			return
-		}
-		queryInfo := r.URL.Query().Get("q")
-		if len(queryInfo) < 1 {
-			http.Error(w, fmt.Sprintf("missing prefix query string"), http.StatusBadRequest)
-			return
-		}
-		userIDsWithGivenPrefix := ctx.lookUpTrie.HasPrefix(strings.ToLower(queryInfo), 20)
-		var retrievedUsers []*users.User
-		for _, id := range userIDsWithGivenPrefix {
-			userWithPrefix, err := ctx.userStore.GetByID(id)
-			if err != nil {
-				http.Error(w, fmt.Sprintf("error while fetching user with given id %d: %v", id, err), http.StatusInternalServerError)
-				return
-			}
-			retrievedUsers = append(retrievedUsers, userWithPrefix)
-		}
-		if retrievedUsers != nil {
-			sort.Slice(retrievedUsers, func(i, j int) bool { return retrievedUsers[i].UserName < retrievedUsers[j].UserName })
-		} else {
-			retrievedUsers = make([]*users.User, 0)
-		}
-		respond(w, retrievedUsers, http.StatusOK)
 	case http.MethodPost:
+		//fetch email and password from salesforce contact table
+		//compares the bcrypted password input with the pre-encrypted password fetched from salesforce
+		//if the password is valid, then check if the password is a default value.
+		//if default, then set a flag to remind the client that the user needs to update the password.
 		err := checkContentType(r, contentTypeJSON)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Content-type/request body must be application/json type"),
 				http.StatusUnsupportedMediaType)
 			return
 		}
-		newUser := &users.NewUser{}
-		err = decodeJsonAndPopulate(r, newUser)
-		if err != nil {
-			http.Error(w, fmt.Sprintf("error decoding JSON: %v", err), http.StatusBadRequest)
-			return
-		}
-		if err := newUser.Validate(); err != nil {
-			http.Error(w, fmt.Sprintf("error not a valid new user profile: %v", err), http.StatusBadRequest)
-			return
-		}
-		//password strength check
-		zxcvbnRes := zxcvbn.PasswordStrength(newUser.Password, nil)
-		if zxcvbnRes.Score < 3 {
-			//not safely unguessable so reject request
-			http.Error(w, fmt.Sprintf("Given password is not safely unguessable. Time taken to crack your password: %d",
-				zxcvbnRes.CrackTime), http.StatusBadRequest)
-			return
-		}
-		user, err := newUser.ToUser()
-		if err != nil {
-			http.Error(w, fmt.Sprintf("error converting new user to user profile: %v", err), http.StatusInternalServerError)
-			return
-		}
-		//check if the new user's email and username values are unique
-		uniqueUserCheck, err := ctx.userStore.GetByEmail(user.Email)
-		if err != nil {
-			http.Error(w, fmt.Sprintf("error getting user by email: %v", err), http.StatusInternalServerError)
-			return
-		}
-		if uniqueUserCheck != nil {
-			http.Error(w, fmt.Sprintf("error requested new user's email or username is not unique"), http.StatusBadRequest)
-			return
-		}
-		uniqueUserCheck, err = ctx.userStore.GetByUserName(user.UserName)
-		if err != nil {
-			http.Error(w, fmt.Sprintf("error getting user by username: %v", err), http.StatusInternalServerError)
-			return
-		}
-		if uniqueUserCheck != nil {
-			http.Error(w, fmt.Sprintf("error requested new user's email or username is not unique"), http.StatusBadRequest)
-			return
-		}
-		user, err = ctx.userStore.Insert(user)
-		if err != nil {
-			http.Error(w, fmt.Sprintf("error inserting new user into the database: %v", err), http.StatusInternalServerError)
-			return
-		}
-		_, err = sessions.BeginSession(ctx.signInKey, ctx.sessionStore, &SessionState{Time:time.Now(), AuthUser:user}, w)
-		if err != nil {
-			http.Error(w, fmt.Sprintf("error initializing a new session: %v", err), http.StatusInternalServerError)
-			return
-		}
-		storeOrRemoveFromTrie(user, ctx.lookUpTrie, false)
-		respond(w, user, http.StatusCreated)
-	default:
-		http.Error(w, fmt.Sprintf("invalid methods"), http.StatusMethodNotAllowed)
-		return
-	}
-}
-
-func (ctx *SessionContext)SpecificUserHandler(w http.ResponseWriter, r *http.Request) {
-	_, err := sessions.GetSessionID(r, ctx.signInKey)
-	if err != nil {
-		http.Error(w, fmt.Sprintf("unauthorized user: %v", err), http.StatusUnauthorized)
-		return
-	}
-	var currentState SessionState
-	_, err = sessions.GetState(r, ctx.signInKey, ctx.sessionStore, &currentState)
-	if err != nil {
-		http.Error(w, fmt.Sprintf("error getting the current state of user: %v", err), http.StatusInternalServerError)
-		return
-	}
-	requestedId := path.Base(r.URL.Path)
-	var intId int64
-	switch requestedId {
-	case "me":
-		intId = currentState.AuthUser.UserID
-	default:
-		intId, err = strconv.ParseInt(requestedId, 10, 64)
-		if err != nil {
-		http.Error(w, fmt.Sprintf("error converting the requested user id: %v", err), http.StatusBadRequest)
-		return
-		}
-	}
-	switch r.Method {
-	case http.MethodGet:
-		user, err := ctx.userStore.GetByID(intId)
-		if err != nil {
-			http.Error(w, fmt.Sprintf("error fetching the requested user profile from store: %v", err), http.StatusInternalServerError)
-			return
-		}
-		if user == nil {
-			http.Error(w, fmt.Sprintf("error couldn't find the requested user profile fromt store"), http.StatusNotFound)
-			return
-		}
-		respond(w, user, http.StatusOK)
-	case http.MethodPatch:
-		if requestedId != "me" && currentState.AuthUser.UserID != intId {
-			http.Error(w, fmt.Sprintf("error requested id and currently authenticated user it does not match"),
-				http.StatusForbidden)
-			return
-		}
-		err = checkContentType(r, contentTypeJSON)
-		if err != nil {
-			http.Error(w, fmt.Sprintf("Content-type/request body must be application/json type"),
-				http.StatusUnsupportedMediaType)
-			return
-		}
-		userUpdate := &users.Updates{}
-		err = decodeJsonAndPopulate(r, userUpdate)
-		if err != nil {
-			http.Error(w, fmt.Sprintf("error decoding JSON: %v", err), http.StatusBadRequest)
-			return
-		}
-		storeOrRemoveFromTrie(currentState.AuthUser, ctx.lookUpTrie, true)
-		err = currentState.AuthUser.ApplyUpdates(userUpdate)
-		//if fail to apply update, roll back by adding
-		if err != nil {
-			storeOrRemoveFromTrie(currentState.AuthUser, ctx.lookUpTrie, false)
-			http.Error(w, fmt.Sprintf("error updating current user, update data not valid: %v", err), http.StatusBadRequest)
-			return
-		}
-		updatedUser, err := ctx.userStore.Update(intId, userUpdate)
-		if err != nil {
-			http.Error(w, fmt.Sprintf("error updating user in the database: %v", err), http.StatusInternalServerError)
-			return
-		}
-		//update successful so patch trie
-		storeOrRemoveFromTrie(updatedUser, ctx.lookUpTrie, false)
-		respond(w, updatedUser, http.StatusOK)
-	default:
-		http.Error(w, fmt.Sprintf("invalid methods"), http.StatusMethodNotAllowed)
-		return
-	}
-}
-
-func (ctx *SessionContext)SessionsHandler(w http.ResponseWriter, r *http.Request) {
-	switch r.Method {
-	case http.MethodPost:
-		err := checkContentType(r, contentTypeJSON)
-		if err != nil {
-			http.Error(w, fmt.Sprintf("Content-type/request body must be application/json type"),
-				http.StatusUnsupportedMediaType)
-			return
-		}
-		userCreds := &users.Credentials{}
+		userCreds := &Credentials{}
 		err = decodeJsonAndPopulate(r, userCreds)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("error decoding JSON: %v", err), http.StatusBadRequest)
 			return
 		}
-		user, err := ctx.userStore.GetByEmail(userCreds.Email)
+		salesforceCredentialSObjects := &Records{}
+		err = ctx.forceApi.Query("SELECT Email, password__c FROM Contact WHERE Email='" +
+			userCreds.Email +"' OR Primary_Email__c='" + userCreds.Email + "'", salesforceCredentialSObjects)
 		if err != nil {
-			http.Error(w, fmt.Sprintf("error fetching user by email for authentication: %v", err), http.StatusInternalServerError)
+			http.Error(w, fmt.Sprintf("error fetching data from Salesforce: %v", err),
+				http.StatusInternalServerError)
 			return
 		}
-		if user == nil {
-			bcrypt.GenerateFromPassword([]byte(userCreds.Password), bcryptCost)
-			http.Error(w, fmt.Sprintf("invalid credentials"), http.StatusUnauthorized)
+		if salesforceCredentialSObjects.TotalSize == 0 {
+			http.Error(w, fmt.Sprint("no username found"),
+				http.StatusUnauthorized)
 			return
 		}
-		if err = user.Authenticate(userCreds.Password); err != nil {
-			http.Error(w, fmt.Sprintf("invalid credentials"), http.StatusUnauthorized)
-			return
-		}
-		_, err = sessions.BeginSession(ctx.signInKey, ctx.sessionStore, &SessionState{Time:time.Now(), AuthUser:user}, w)
+		authResponse := &AuthToken{}
+		//check password hash
+		err = bcrypt.CompareHashAndPassword([]byte(salesforceCredentialSObjects.Records[0].Password),
+			[]byte(userCreds.Password))
 		if err != nil {
-			http.Error(w, fmt.Sprintf("error initializing a new session: %v", err), http.StatusInternalServerError)
+			http.Error(w, fmt.Sprintf("Incorrect password: %v", err), http.StatusUnauthorized)
 			return
+		} else {
+			//if password is collaborator2019, then the user needs to be prompted to change
+			if userCreds.Password == "collaborator2019" {
+				authResponse.Default_password = true
+			}
 		}
-		respond(w, user, http.StatusCreated)
+		//url used for possible password update.
+		authResponse.Sojbect_url = salesforceCredentialSObjects.Records[0].Attributes.Url
+		authResponse.Access_token = ctx.forceApi.GetAccessToken()
+		authResponse.Token_type = "Bearer"
+		respond(w, authResponse, http.StatusOK)
 	default:
 		http.Error(w, fmt.Sprintf("invalid methods"), http.StatusMethodNotAllowed)
 		return
 	}
 }
 
-func (ctx *SessionContext)SpecificSessionHandler(w http.ResponseWriter, r *http.Request) {
+func (ctx *SessionContext)PasswordUpdate(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
-	case http.MethodDelete:
-		p := path.Base(r.URL.Path)
-		if p != "mine" {
-			http.Error(w, fmt.Sprintf("error trying to end other user's session with no permission"), http.StatusForbidden)
-			return
-		}
-		_, err := sessions.EndSession(r, ctx.signInKey, ctx.sessionStore)
+	case http.MethodPost:
+		err := checkContentType(r, contentTypeJSON)
 		if err != nil {
-			http.Error(w, fmt.Sprintf("error trying to end session: %v", err), http.StatusInternalServerError)
+			http.Error(w, fmt.Sprintf("Content-type/request body must be application/json type"),
+				http.StatusUnsupportedMediaType)
 			return
 		}
-		w.Header().Add(headerContentType, contentTypeText)
-		w.WriteHeader(http.StatusOK)
-		fmt.Fprint(w, "signed out")
+		newPassword := &PasswordRequest{}
+		err = decodeJsonAndPopulate(r, newPassword)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("username does not exist: %v", err), http.StatusBadRequest)
+			return
+		}
+		//must have a valid access token.
+		if newPassword.Access_token != ctx.forceApi.GetAccessToken() {
+			http.Error(w, fmt.Sprint("unauthorized user"), http.StatusUnauthorized)
+			return
+		}
+		newPassHash, err := bcrypt.GenerateFromPassword([]byte(newPassword.New_password), bcryptCost)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("error generating encrypted hash: %v", err),
+				http.StatusBadRequest)
+			return
+		}
+		rawPatchPayload := `{"password__c":` + string(newPassHash)
+		unMarshPatchPayload := NewPassword{}
+		json.Unmarshal([]byte(rawPatchPayload), &unMarshPatchPayload)
+		err = ctx.forceApi.Patch(newPassword.Sobject_url, nil, unMarshPatchPayload, nil)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("error updating password: %v", err), http.StatusBadRequest)
+			return
+		}
+		w.WriteHeader(http.StatusNoContent)
+		fmt.Fprint(w, "Password updated.")
 	default:
 		http.Error(w, fmt.Sprintf("invalid methods"), http.StatusMethodNotAllowed)
 		return
