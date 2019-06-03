@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarBrand } from 'reactstrap';
+import { Container, Row, Col, Navbar, NavbarBrand } from 'reactstrap'
 import { withRouter } from 'react-router-dom'
 
 const NavBarStyle = {
@@ -9,7 +9,7 @@ const NavBarStyle = {
 
 const BrandStyle = {
     height: '60px',
-    paddingLeft: '10vh'
+    marginTop: '2vh',
 }
 
 const brandImage = require('../images/ihme_logo.png')
@@ -17,17 +17,25 @@ const brandImage = require('../images/ihme_logo.png')
 class ProfileNavBar extends Component {
     render() {
         return (
-            <div>
-                <Navbar style={NavBarStyle} expand="md">
-                    <NavbarBrand href="/home">
-                        <img 
-                            src={brandImage} 
-                            alt="IHME logo" 
-                            style={BrandStyle}
-                        />
-                    </NavbarBrand>
-                </Navbar>
-            </div>
+            <Container>
+                <Row>
+                    <Col sm="3">
+                        <NavbarBrand href="/home">
+                            <img
+                                src={brandImage}
+                                alt="IHME logo"
+                                style={BrandStyle}
+                            />
+                        </NavbarBrand>
+                    </Col>
+
+                    <Col sm="6">
+                    </Col>
+
+                    <Col sm="3">
+                    </Col>
+                </Row>
+            </Container>
         )
     }
 }
