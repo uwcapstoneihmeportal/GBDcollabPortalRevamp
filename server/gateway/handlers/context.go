@@ -11,10 +11,8 @@ import (
 
 type SessionContext struct {
 	forceApi  *force.ForceApi
-	access_code string
 }
 
 func NewContext(forceApi *force.ForceApi) *SessionContext {
-	access_code := forceApi.GetAccessToken()
-	return &SessionContext{forceApi, access_code}
+	return &SessionContext{forceApi}
 }

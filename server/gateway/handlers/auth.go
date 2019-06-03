@@ -71,7 +71,7 @@ func (ctx *SessionContext)Authorize(w http.ResponseWriter, r *http.Request) {
 		}
 		salesforceCredentialSObjects := &Records{}
 		err = ctx.forceApi.Query("SELECT Email, password__c FROM Contact WHERE Email='" +
-			userCreds.Email +"'", salesforceCredentialSObjects)
+			userCreds.Email +"' OR Primary_Email__c='" + userCreds.Email + "'", salesforceCredentialSObjects)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("error fetching data from Salesforce: %v", err),
 				http.StatusInternalServerError)
@@ -122,7 +122,7 @@ func (ctx *SessionContext)PasswordUpdate(w http.ResponseWriter, r *http.Request)
 			return
 		}
 		//must have a valid access token.
-		if newPassword.Access_token != ctx.access_code {
+		if newPassword.Access_token != ctx.forceApi.GetAccessToken() {
 			http.Error(w, fmt.Sprint("unauthorized user"), http.StatusUnauthorized)
 			return
 		}
