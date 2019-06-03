@@ -2,8 +2,14 @@
 
 This is a repo that will include frontend and backend code for the collaborator portal
 
-##Frontend Client
-###Using HTTPS with nginx + docker
+# Client Side
+**Using HTTPS with nginx + docker**
+
+
+
+
+# Server Side
+
 **Make sure to change the server name in deafult.conf file.**
 The NGINX Docker container keeps its default configuration file at `/etc/nginx/conf.d/default.conf`. You can get a copy of this file by executing these commands on your development machine:
 ```
