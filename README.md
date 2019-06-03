@@ -1,4 +1,5 @@
-# uwcapstoneihmeportal.github.io
+# GBDcollabPortalRevamp
+
 This is a repo that will include frontend and backend code for the collaborator portal
 ##Frontend Client
 ###Using HTTPS with nginx + docker
