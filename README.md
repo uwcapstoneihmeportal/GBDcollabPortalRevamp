@@ -22,6 +22,7 @@ Of course there may be more left, but these are some particular items of importa
 
 **Please note that the current API URL's are set in `actions.js` and can be easily changed** 
 
+In order to integrate a third party application, like this project, with Salesforce, be sure to whitelist the site as given per the instructions at: https://help.salesforce.com/articleView?id=bi_setup_whitelist.htm&type=5
 
 **Using HTTPS with nginx + docker**
 **Make sure to change the server name in deafult.conf file.**
