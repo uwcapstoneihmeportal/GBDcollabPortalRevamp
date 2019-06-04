@@ -5,16 +5,16 @@ This is a repo that will include frontend and backend code for the collaborator 
 
 # A Few Notes on Whats Left
 
-[ ] Add support for changing password. The API is in place, but a UI component to update needs to be created
+* [ ] Add support for changing password. The API is in place, but a UI component to update needs to be created
 * Note that the authorization API returns a ``default_password`` boolean that can be used to show the UI
-[ ] Add support to require some fields
-[ ] Add functionality to potentially alert IHME staff memeber when changes are made as a sanity check
-[ ] Add edit support for Salesforce dropdown fields (mainly expertise, age, etc)
-[ ] Add view and edit support for Affiliation name
+* [ ] Add support to require some fields
+* [ ] Add functionality to potentially alert IHME staff memeber when changes are made as a sanity check
+* [ ] Add edit support for Salesforce dropdown fields (mainly expertise, age, etc)
+* [ ] Add view and edit support for Affiliation name
 * Currently, API gives back an affiliation names unique idenfitier, so another set of API requests will be needed to view and update
-[ ] Add support session management (i.e. logging out after X minutes)
-[ ] Refactoring some components (some repeat code due to time constraint)
-[ ] Refactor some redux reducers, actions for scalability
+* [ ] Add support session management (i.e. logging out after X minutes)
+* [ ] Refactoring some components (some repeat code due to time constraint)
+* [ ] Refactor some redux reducers, actions for scalability
 
 Of course there may be more left, but these are some particular items of importance
 
