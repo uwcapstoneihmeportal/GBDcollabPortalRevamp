@@ -1,3 +1,10 @@
+// URL CONSTANTS
+const authenticationURL = "https://api.infonexus.me/v1/authorize"
+const salesforceBaseURL = "https://ihme--ischool2.cs79.my.salesforce.com"
+
+
+
+
 // actions.js
 import { 
     LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, 
@@ -129,7 +136,7 @@ export function loginUser(email, password) {
     return dispatch => {
         dispatch(loginRequest(email, password))
 
-        fetch("https://api.infonexus.me/v1/authorize", config)
+        fetch(authenticationURL, config)
         .then(response => {
             switch (response.status) {
                 // Successful log in
@@ -156,8 +163,7 @@ export function loginUser(email, password) {
 function fetchContactData(authInfo) {
     let contactObjectPath = authInfo.sobject_url
     let authToken = authInfo.token_type + " " + authInfo.access_token
-    let baseURL = "https://ihme--ischool2.cs79.my.salesforce.com"
-    let userURL = baseURL + contactObjectPath
+    let userURL = salesforceBaseURL + contactObjectPath
 
     let config = {
         method: 'GET',
@@ -197,9 +203,7 @@ function fetchContactData(authInfo) {
 }
 
 export function updateContactData(metaData, fields) {
-    let baseURL = "https://ihme--ischool2.cs79.my.salesforce.com"
-    let userURL = baseURL + metaData.sobject_url
-
+    let userURL = salesforceBaseURL + metaData.sobject_url
     let authToken = metaData.token_type + " " + metaData.access_token
 
     let config = {
