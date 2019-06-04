@@ -22,7 +22,7 @@ class HomeView extends Component {
     }
 
     initViz2() {  
-        const vizUrl2 = 'https://public.tableau.com/views/IHME/OtherViz?:embed=y&:display_count=yes&:origin=viz_share_link';  
+        const vizUrl2 = 'https://public.tableau.com/views/IHME2/OtherViz?:embed=y&:display_count=yes&:origin=viz_share_link';  
         const vizContainer2 = this.vizContainer2;  
         let viz2 = new window.tableau.Viz(vizContainer2, vizUrl2)  
     } 
