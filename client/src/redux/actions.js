@@ -1,16 +1,12 @@
-// URL CONSTANTS
-const authenticationURL = "https://api.infonexus.me/v1/authorize"
-const salesforceBaseURL = "https://ihme--ischool2.cs79.my.salesforce.com"
-
-
-
-
-// actions.js
 import { 
     LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, 
     OPEN_EDIT_MODAL, CLOSE_EDIT_MODAL, 
     UPDATE_PROFILE_REQUEST, UPDATE_PROFILE_FAILURE
 } from './actionTypes' 
+
+// URL CONSTANTS
+const authenticationURL = "https://api.infonexus.me/v1/authorize"
+const salesforceBaseURL = "https://ihme--ischool2.cs79.my.salesforce.com"
 
 //////// LOGIN ACTIONS ///////////
 function loginRequest(email, password) {
