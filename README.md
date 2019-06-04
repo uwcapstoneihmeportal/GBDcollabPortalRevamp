@@ -20,6 +20,9 @@ Of course there may be more left, but these are some particular items of importa
 
 # Client Side
 
+**Please note that the current API URL's are set in `actions.js` and can be easily changed** 
+
+
 **Using HTTPS with nginx + docker**
 **Make sure to change the server name in deafult.conf file.**
 The NGINX Docker container keeps its default configuration file at `/etc/nginx/conf.d/default.conf`. You can get a copy of this file by executing these commands on your development machine:
