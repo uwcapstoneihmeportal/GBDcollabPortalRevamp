@@ -7,7 +7,7 @@ This is a repo that will include frontend and backend code for the collaborator 
 
 * [ ] Add support for changing password. The API is in place, but a UI component to update needs to be created
 * Note that the authorization API returns a ``default_password`` boolean that can be used to show the UI
-* [ ] Add support to require some fields
+* [ ] Add support to require information fields from contacts
 * [ ] Add functionality to potentially alert IHME staff memeber when changes are made as a sanity check
 * [ ] Add edit support for Salesforce dropdown fields (mainly expertise, age, etc)
 * [ ] Add view and edit support for Affiliation name
